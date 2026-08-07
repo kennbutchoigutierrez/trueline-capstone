@@ -1,7 +1,34 @@
 # PROGRESS.md — Trueline Roof Care capstone
 
-**Last worked:** 8 August 2026 · **Resume at:** Build the 4 ad drafts in Meta Ads Manager
-(`facebook-ad.md`), then the two HTML emails
+**Last worked:** 8 August 2026 · **Resume at:** Paste email 2 into workflow A1, then finish
+the 4 Meta ad drafts (`ad-drafts.md`)
+
+**Learned the hard way today:** the email masthead started as a hosted PNG and Gmail
+declined to display it — GHL had kept the image and the URL returned 200, so it was purely
+the client's image policy. Rebuilt as live HTML text on a slate cell. Any future email
+header for this brand should be type and colour, never a remote image.
+
+**⚠ Open architecture gap — the landing page has no form.** Every CTA in `site/index.html`
+links straight to the booking widget, so a visitor who does not book never becomes a
+contact. Consequences:
+
+1. A1's nurture has no real audience. It is triggered on **Contact Created** as a stand-in;
+   the designed trigger is **Form Submitted**.
+2. **No segment tags exist**, so none of the `repair` / `care-plan` / `multi-unit` /
+   `new-build` branching in `brief.md` can run. Every segment currently gets the homeowner
+   nurture.
+
+Fix: build the GHL form (fields below), embed it in `site/index.html` above the calendar.
+
+| Dropdown label — "What do you need?" | Tag |
+|---|---|
+| My house has a leak or damage | `repair` |
+| No leak — I want my house checked before the rains | `care-plan` |
+| I have an apartment, several units, or more than one house | `multi-unit` |
+| I'm building new and have plans | `new-build` |
+
+Single select, required. Plus first name, email, phone (all required — A1 opens with SMS),
+last name and a free-text "anything we should know" optional.
 
 ---
 
@@ -16,7 +43,7 @@
 | 5 | ClickFunnels landing page | 🔨 **Sections 1–4 built. Resume at Section 5.** |
 | 6 | Instagram carousel | ✅ **Done — 9 slides, rendered to `carousel/out/`** |
 | 7 | Facebook ad draft | 🔨 **Copy + assets + walkthrough ready (`facebook-ad.md`). Build the 4 drafts in Ads Manager.** |
-| 8 | Two pretty HTML emails | ✅ **Built — `emails/`. Paste into GHL + send a test.** |
+| 8 | Two pretty HTML emails | ✅ Built · email 1 **live in GHL, test received styled**. Email 2 still to paste into A1. |
 | 9 | Three GHL automations | ⬜ Not started |
 | 10 | **Loom capability pitch** — the hero deliverable | ⬜ Not started |
 | 11 | Raven Day 5 walkthrough | ⬜ Not started |
