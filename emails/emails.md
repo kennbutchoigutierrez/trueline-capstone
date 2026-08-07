@@ -31,16 +31,26 @@ serif`, so Apple Mail and iOS get Fraunces and everyone else gets Georgia. The d
 checked in Georgia, which is what most recipients see. A high-contrast serif over a sans
 body is the look from `brief.md`; Georgia keeps that relationship intact.
 
-**Images are hosted, not embedded.** Gmail and Outlook strip base64 `data:` images
-entirely. Both emails pull from the live site:
+**The masthead is live text, not an image.** It started as a hosted PNG and Gmail declined
+to display it — GHL had kept the image and the URL returned 200, so the failure was purely
+the client's image policy. A header that depends on a remote fetch is fragile by design.
+The wordmark, copper rule and tagline are now HTML on a slate cell, so the brand renders
+with images off, behind a proxy, or under any client policy. Cost: the roof photograph is
+no longer in the header. Worth it — type and colour cannot fail.
+
+The image version is still in git history (`emails/masthead.html` renders it) if you ever
+want it back once sender reputation is established.
+
+**Supporting images are hosted, never embedded.** Gmail and Outlook strip base64 `data:`
+images entirely, so email 2's diagram pulls from the live site:
 
 ```
-https://trueline-roof-care.vercel.app/email/masthead.png
 https://trueline-roof-care.vercel.app/email/sign-washer.png
 ```
 
-Verified 200, `image/png`. **If the Vercel site ever goes down, the emails lose their
-images** — that is the tradeoff for having them display at all.
+It carries a styled `alt` on a chalk panel, so a blocked image leaves a readable caption
+rather than a hole. **If the Vercel site goes down that image stops loading** — which is
+exactly why nothing load-bearing is in it.
 
 **Nothing important lives only in an image.** Many clients block images by default, so
 every headline, price and the CTA are live HTML text. Images carry descriptive `alt` text
