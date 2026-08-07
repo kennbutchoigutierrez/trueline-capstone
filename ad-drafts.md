@@ -11,6 +11,30 @@ is just the fill-in sheet.**
 
 ---
 
+## Structure — one campaign, one ad set, four ads
+
+```
+Campaign     Trueline — Six Signs — DRAFT
+└─ Ad set    Laguna · 35–60 · Feed + Stories + Reels
+   ├─ Ad     six-signs-carousel
+   ├─ Ad     story-7800
+   ├─ Ad     taglish-380k
+   └─ Ad     the-18-peso-part
+```
+
+**Not four campaigns.** All four ads share one ad set so they reach the same audience out
+of the same budget — that is what makes their results comparable. Separate ad sets would
+split the audience four ways and any difference in performance could just be a difference
+in who saw what.
+
+Build `six-signs-carousel` fully, then **Duplicate** the ad into the same ad set three
+times and swap format, creative and copy. A duplicated draft stays a draft.
+
+*Known tradeoff:* with four ads in one ad set, Meta concentrates delivery on whichever
+gets early traction, so the others can be starved before they are really tested. The
+rigorous fix is Meta's A/B Test tool, which forces an even split. Irrelevant for a draft
+that never runs, but worth naming.
+
 ## Shared across all four
 
 | Field | Value |
