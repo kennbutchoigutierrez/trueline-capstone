@@ -16,7 +16,7 @@
 | 5 | ClickFunnels landing page | 🔨 **Sections 1–4 built. Resume at Section 5.** |
 | 6 | Instagram carousel | ✅ **Done — 9 slides, rendered to `carousel/out/`** |
 | 7 | Facebook ad draft | 🔨 **Copy + assets + walkthrough ready (`facebook-ad.md`). Build the 4 drafts in Ads Manager.** |
-| 8 | Two pretty HTML emails | ⬜ Not started |
+| 8 | Two pretty HTML emails | ✅ **Built — `emails/`. Paste into GHL + send a test.** |
 | 9 | Three GHL automations | ⬜ Not started |
 | 10 | **Loom capability pitch** — the hero deliverable | ⬜ Not started |
 | 11 | Raven Day 5 walkthrough | ⬜ Not started |

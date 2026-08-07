@@ -344,6 +344,7 @@ much higher on multi-unit and new-build.
 | Landing page — ClickFunnels build | Sections 1–4 built, platform-fluency proof | 🔨 |
 | GHL pipeline — `Trueline Roof Leads` | 6 stages, 15 seeded leads | ✅ |
 | Instagram carousel | `carousel/out/slide-01…09.png` · build sheet `carousel/carousel.md` | ✅ 9 slides |
+| HTML emails ×2 | `emails/email-1-booked.html`, `emails/email-2-nurture.html` · `emails/emails.md` | ✅ built |
 | Facebook ad draft | Copy pack + Ads Manager walkthrough in `facebook-ad.md` · 4 drafts · 1:1 cards in `carousel/out-square/` | 🔨 build in Ads Manager |
 | Loom capability pitch | — | ⬜ |
 | Raven Day 5 walkthrough | — | ⬜ |
