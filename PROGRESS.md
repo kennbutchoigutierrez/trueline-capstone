@@ -36,7 +36,14 @@ display link, the Stories 9:16 swap, and save-as-draft. Drafts 2–4 not started
 draft 1 at ad level three times and swap creative and copy. **Everything paste-ready is in
 `ad-drafts.md`.** Never click Publish; close with **X → Save as draft**.
 
-## 2 · The three automations — the last real build
+## 2 · The segmentation form, then the three automations
+
+**Build the form first** — see `ghl-form.md`, it has a paste-ready extension prompt. Send
+me the embed code and the custom field key and the form goes into `site/index.html`. Doing
+it before the automations means A1 gets its real trigger and its segment branching in one
+pass instead of being rebuilt later.
+
+## 3 · The three automations — the last real build
 
 Specs are already written in `brief.md` and `plan.md`; this is assembly, not design.
 
@@ -48,7 +55,7 @@ Specs are already written in `brief.md` and `plan.md`; this is assembly, not des
 - **A3 Quote Follow-Up** — stage to Quote Sent → day 3 "questions on the quotation?" →
   day 7 the April-vs-August seasonal note → day 14 Lost + `nurture-may`
 
-## 3 · Then the two videos
+## 4 · Then the two videos
 
 Loom capability pitch (the hero deliverable) and the Raven Day 5 walkthrough. Screenshot
 list is further down this file.
@@ -67,18 +74,10 @@ not book never becomes a contact. Two consequences:
    `new-build` branching in `brief.md` can run. Every segment currently gets the homeowner
    nurture — a landlord with twelve roofs would get an email about one ceiling stain.
 
-Fix: build the GHL form, embed it in `site/index.html` above the calendar.
-
-| Dropdown label — "What do you need?" | Value / tag |
-|---|---|
-| My house has a leak or damage | `repair` |
-| No leak — I want my house checked before the rains | `care-plan` |
-| I have an apartment, several units, or more than one house | `multi-unit` |
-| I'm building new and have plans | `new-build` |
-
-Single select, required. Plus first name, email, phone (all required — A1 opens with SMS),
-last name and a free-text "anything we should know" optional. In GHL the sentence goes in
-the option **label** and the tag string in the **value**.
+**Fix: → `ghl-form.md`.** Full field spec, the four dropdown labels and values, the
+redirect-to-calendar behaviour, how the tagging actually works (in the workflow, not the
+form — GHL cannot tag per dropdown option), the follow-up steps once it exists, and a
+ready-to-send prompt for the Claude browser extension.
 
 ---
 
