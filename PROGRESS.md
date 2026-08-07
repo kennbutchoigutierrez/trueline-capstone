@@ -37,6 +37,10 @@ need?" question that tags the lead and branches the follow-up.
 
 ## Live assets
 
+**Repo:** https://github.com/kennbutchoigutierrez/trueline-capstone (public)
+Connected to Vercel — every push to `main` redeploys the landing page. `vercel.json` sets
+`outputDirectory` to `site`, so the deploy serves that folder from the repo root.
+
 **Booking calendar:**
 `https://api.leadconnectorhq.com/widget/booking/OzxJlo2ymaCQIpZC8sUi`
 15 min · Mon–Sat 08:00–17:00 · Asia/Manila · 30-min slot interval · 2h notice · max 6/day ·

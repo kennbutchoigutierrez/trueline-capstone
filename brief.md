@@ -339,7 +339,8 @@ much higher on multi-unit and new-build.
 | **Booking calendar** — `15-min Roof Check Call` | https://api.leadconnectorhq.com/widget/booking/OzxJlo2ymaCQIpZC8sUi | ✅ |
 | **Landing page** — hosted | https://claude.ai/code/artifact/477138f9-ed5b-4fb6-8cda-6ed86db1788a | ✅ |
 | **Landing page — live, public** | https://trueline-roof-care.vercel.app | ✅ **ad destination** |
-| Landing page — source | `site/index.html` → `cd site && vercel deploy --prod --yes` | ✅ deployed |
+| Source repo | https://github.com/kennbutchoigutierrez/trueline-capstone | ✅ public |
+| Landing page — source | `site/index.html`, auto-deploys on push to `main` | ✅ deployed |
 | Landing page — ClickFunnels build | Sections 1–4 built, platform-fluency proof | 🔨 |
 | GHL pipeline — `Trueline Roof Leads` | 6 stages, 15 seeded leads | ✅ |
 | Instagram carousel | `carousel/out/slide-01…09.png` · build sheet `carousel/carousel.md` | ✅ 9 slides |
