@@ -33,6 +33,18 @@ the four hooks apart in analytics later.
 
 On the carousel, every card gets the same URL as draft 1.
 
+**Display link** (optional field under Website URL) — same on all four drafts:
+
+```
+trueline-roof-care.vercel.app
+```
+
+No scheme, no path, no UTM tail. This is what the viewer sees instead of the long tagged
+URL, while the click still carries the tracking. It must match the real destination
+domain — Meta rejects a display link that points somewhere you do not actually serve, so
+a nicer-looking `truelineroofcare.ph` is not an option here. On the carousel it is one
+ad-level field, not per card.
+
 ---
 
 ## What you are building: four drafts, not one
@@ -258,6 +270,7 @@ end-of-day video.
 - [ ] Destination URL loads for a logged-out stranger (test in incognito)
 - [ ] URL carries its `utm_content` value, and each draft's value is different
 - [ ] CTA button is **Learn more** on all four
+- [ ] Display link set to `trueline-roof-care.vercel.app`, so the UTM tail stays hidden
 - [ ] Carousel cards are in the intended order, and auto-reorder is **off**
 - [ ] Every headline fits without a trailing ellipsis in the preview
 - [ ] Preview checked in **Facebook Feed**, **Instagram Feed**, **Stories** and **Reels**
