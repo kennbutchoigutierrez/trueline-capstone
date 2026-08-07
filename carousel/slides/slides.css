@@ -1,0 +1,222 @@
+@import url("fonts.css");
+
+/* ============================================================
+   Trueline Roof Care — Instagram carousel slide system
+   1080 x 1350 (4:5).  Palette + type locked to brief.md.
+   ============================================================ */
+
+:root{
+  --slate:#16232E;
+  --storm:#2C4356;
+  --chalk:#F6F4EF;
+  --copper:#C4622D;
+  --copper-light:#E0975E;
+  --moss:#3E6B57;
+  --line:#DCD7CC;
+  --ink-muted:#5C6B75;
+
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'Inter',-apple-system,'Segoe UI',sans-serif;
+
+  --pad-x:88px;
+  --pad-t:74px;
+  --pad-b:76px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{width:1080px;height:1350px;overflow:hidden}
+
+body{
+  font-family:var(--sans);
+  background:var(--chalk);
+  color:var(--storm);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+  font-variant-ligatures:none;
+}
+
+.slide{
+  width:1080px;height:1350px;
+  padding:var(--pad-t) var(--pad-x) var(--pad-b);
+  display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  background:var(--chalk);
+}
+
+/* dark variant — hook, counterweight, CTA */
+.slide.dark{background:var(--slate);color:var(--chalk)}
+
+/* ---------- header rail ---------- */
+.rail{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:18px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-muted);
+  flex:none;
+}
+.dark .rail{color:rgba(246,244,239,.52)}
+.rail .count{color:var(--copper);font-variant-numeric:tabular-nums}
+.dark .rail .count{color:var(--copper-light)}
+
+/* ---------- type ---------- */
+.h1{
+  font-family:var(--serif);font-weight:700;
+  font-size:86px;line-height:1.04;letter-spacing:-.022em;
+  color:var(--slate);
+}
+.dark .h1{color:var(--chalk)}
+
+.h2{
+  font-family:var(--serif);font-weight:700;
+  font-size:70px;line-height:1.08;letter-spacing:-.02em;
+  color:var(--slate);
+}
+.dark .h2{color:var(--chalk)}
+
+.label{
+  font-size:19px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-muted);
+}
+.dark .label{color:rgba(246,244,239,.5)}
+
+.body{font-size:31px;line-height:1.48;font-weight:400;color:var(--storm)}
+.dark .body{color:rgba(246,244,239,.82)}
+
+.price{
+  font-family:var(--serif);font-weight:700;
+  font-size:56px;line-height:1;letter-spacing:-.015em;
+  color:var(--copper);font-variant-numeric:tabular-nums;
+}
+
+em{font-style:italic}
+strong{font-weight:600;color:var(--slate)}
+.dark strong{color:var(--chalk);font-weight:600}
+
+/* ---------- bits ---------- */
+.rule{width:104px;height:5px;background:var(--copper);flex:none}
+.spacer{flex:1 1 auto;min-height:0}
+
+.swipe{
+  font-size:19px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--copper-light);display:flex;align-items:center;gap:14px;
+}
+
+/* diagram plate — the recurring object across all six sign slides.
+   Grows to absorb slack so the fact rows sit at the same height on every
+   slide, whether the title runs to one line or two. */
+.plate{
+  flex:1 1 auto;
+  background:#EFEBE2;
+  border:1px solid var(--line);
+  border-radius:3px;
+  min-height:452px;
+  padding:22px;
+  display:flex;
+  position:relative;
+}
+/* the diagram scales to the plate rather than floating small inside it */
+.plate svg{display:block;width:100%;height:100%}
+
+/* the two stacked fact rows on every sign slide */
+.fact{display:flex;flex-direction:column;gap:13px;flex:none}
+
+/* footer signature */
+.sig{
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--line);padding-top:24px;flex:none;
+  font-size:18px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-muted);
+}
+.dark .sig{border-top-color:rgba(246,244,239,.16);color:rgba(246,244,239,.5)}
+
+/* SVG diagram tokens */
+.d-panel{fill:#C9D0D6}
+.d-panel-dk{fill:#A9B4BC}
+.d-steel{fill:var(--storm)}
+.d-slate{fill:var(--slate)}
+.d-stroke{stroke:var(--slate);stroke-width:3;fill:none}
+.d-thin{stroke:var(--ink-muted);stroke-width:2;fill:none}
+.d-bad{fill:var(--copper)}
+.d-bad-s{stroke:var(--copper);stroke-width:4;fill:none}
+.d-good{stroke:var(--moss);stroke-width:4;fill:none}
+.d-lbl{
+  font-family:'Inter',sans-serif;font-size:17px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;fill:var(--ink-muted);
+}
+.d-lbl-bad{fill:var(--copper)}
+.d-dash{stroke:var(--copper);stroke-width:3;fill:none;stroke-dasharray:9 9}
+
+/* ============================================================
+   Square variant — 1080 x 1080, for Meta carousel ad cards.
+   Meta carousel cards are strictly 1:1, so the 4:5 slides above
+   (the Instagram organic set) would be centre-cropped there.
+   Same HTML both ways; the viewport height picks the variant.
+   The "what it usually means" line is dropped here because in an
+   ad it lives in the card's own headline field instead.
+   ============================================================ */
+@media (max-height:1100px){
+  html,body{height:1080px}
+  .slide{height:1080px;padding:60px 72px}
+
+  .h1{font-size:76px}
+  .h2{font-size:62px}
+  .body{font-size:29px}
+  .price{font-size:50px}
+
+  .plate{min-height:340px;padding:18px}
+  .fact.means{display:none}
+  .sig{display:none}
+
+  /* 01 hook */
+  .slide.hook{padding:0}
+  .slide.hook .band{height:430px}
+  .slide.hook .band .rail{top:56px}
+  .slide.hook .lower{padding:0 72px 56px}
+
+  /* 08 counterweight */
+  .slide .item-h{font-size:38px}
+  .slide .item-b{font-size:26px;margin-top:10px}
+  .slide .item-ico{width:84px;height:84px}
+  .slide .close{font-size:34px;padding-left:28px}
+
+  /* 09 CTA */
+  .slide .cta{padding:28px 34px;font-size:31px}
+  .slide .bio{display:none}   /* a paid ad has its own CTA button, not a bio link */
+  .slide .trust{font-size:17px}
+}
+
+/* ============================================================
+   Story variant — 1080 x 1920, for Stories and Reels placements.
+   Meta covers the top ~14% (profile, "Sponsored") and the bottom
+   ~20% (CTA, swipe area), so the padding here is not decorative:
+   it keeps every word inside the readable band. Photography may
+   bleed into those zones; type never does.
+   ============================================================ */
+@media (min-height:1500px){
+  html,body{height:1920px}
+  .slide{height:1920px;padding:300px 88px 400px}
+
+  .h1{font-size:96px}
+  .h2{font-size:76px}
+  .body{font-size:33px}
+  .price{font-size:62px}
+  .label{font-size:21px}
+  .plate{min-height:560px}
+
+  /* 01 hook — photo bleeds up behind the safe zone, the rail sits inside it */
+  .slide.hook{padding:0}
+  .slide.hook .band{height:900px}
+  .slide.hook .band .rail{top:300px}
+  .slide.hook .lower{padding:0 88px 400px}
+
+  /* 08 counterweight */
+  .slide .item-h{font-size:50px}
+  .slide .item-b{font-size:32px}
+  .slide .item-ico{width:120px;height:120px}
+  .slide .close{font-size:46px}
+
+  /* 09 CTA */
+  .slide .cta{padding:40px 46px;font-size:39px}
+  .slide .bio{display:none}
+  .slide .trust{font-size:21px}
+}
