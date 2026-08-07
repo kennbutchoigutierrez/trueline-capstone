@@ -1,26 +1,75 @@
 # PROGRESS.md — Trueline Roof Care capstone
 
-**Last worked:** 8 August 2026 · **Resume at:** Paste email 2 into workflow A1, then finish
-the 4 Meta ad drafts (`ad-drafts.md`)
+**Last worked:** 8 August 2026
+**Remaining:** the 3 GHL automations → Raven Day 5 walkthrough → Loom capability pitch
 
-**Learned the hard way today:** the email masthead started as a hosted PNG and Gmail
-declined to display it — GHL had kept the image and the URL returned 200, so it was purely
-the client's image policy. Rebuilt as live HTML text on a slate cell. Any future email
-header for this brand should be type and colour, never a remote image.
+---
 
-**⚠ Open architecture gap — the landing page has no form.** Every CTA in `site/index.html`
-links straight to the booking widget, so a visitor who does not book never becomes a
-contact. Consequences:
+# RESUME HERE
 
-1. A1's nurture has no real audience. It is triggered on **Contact Created** as a stand-in;
-   the designed trigger is **Form Submitted**.
+## 0 · Live links, so you can re-enter cold
+
+| | |
+|---|---|
+| Landing page | https://trueline-roof-care.vercel.app |
+| Repo | https://github.com/kennbutchoigutierrez/trueline-capstone (public) |
+| Booking calendar | https://api.leadconnectorhq.com/widget/booking/OzxJlo2ymaCQIpZC8sUi |
+
+Push to `main` and Vercel redeploys the landing page. `vercel.json` sets
+`outputDirectory` to `site`, so the deploy serves that folder from the repo root.
+
+## 1 · Loose ends, ~40 min
+
+**GHL — email 2 into A1.** Workflow `A1 — Speed-to-Lead` was being built when we stopped:
+trigger **Contact Created** (no filters) → **Wait 24h** → **If/Else: has no appointment** →
+**Send Email** on the else branch. Paste `emails/email-2-nurture.html` via the code editor,
+subject `Six signs it's a repair, not a re-roof`, then send yourself a test. Keep the
+workflow unpublished.
+
+Email 1 is already live in **A2 — Appointment Confirm & Show-Up** and its test arrived
+styled. Still to verify on email 1: that `{{contact.first_name}}` actually fills in, and
+that GHL is not appending a second unsubscribe under the one in the footer.
+
+**Meta Ads Manager — 4 drafts.** Campaign and ad set exist. Draft 1 `six-signs-carousel`
+had its five cards, headlines and descriptions uploaded; still needs primary text, URL,
+display link, the Stories 9:16 swap, and save-as-draft. Drafts 2–4 not started — duplicate
+draft 1 at ad level three times and swap creative and copy. **Everything paste-ready is in
+`ad-drafts.md`.** Never click Publish; close with **X → Save as draft**.
+
+## 2 · The three automations — the last real build
+
+Specs are already written in `brief.md` and `plan.md`; this is assembly, not design.
+
+- **A1 Speed-to-Lead** — form submit → SMS + email inside 60s → 5-min call task → branch on
+  segment tag → no booking in 24h send email 2 → no booking in 4 days second SMS → Lost +
+  `nurture-may`
+- **A2 Confirm & Show-Up** — booking → stage to Call Booked → email 1 → SMS 24h before →
+  SMS 1h before → no-show fires a two-touch rescue back to Contacted
+- **A3 Quote Follow-Up** — stage to Quote Sent → day 3 "questions on the quotation?" →
+  day 7 the April-vs-August seasonal note → day 14 Lost + `nurture-may`
+
+## 3 · Then the two videos
+
+Loom capability pitch (the hero deliverable) and the Raven Day 5 walkthrough. Screenshot
+list is further down this file.
+
+---
+
+## ⚠ Open architecture gap — the landing page has no form
+
+Every CTA in `site/index.html` links straight to the booking widget, so a visitor who does
+not book never becomes a contact. Two consequences:
+
+1. **A1's nurture has no real audience.** It is triggered on `Contact Created` as a
+   stand-in; the designed trigger is `Form Submitted`. When the form exists, **replace**
+   the trigger — do not add it alongside, or form leads fire both and get the email twice.
 2. **No segment tags exist**, so none of the `repair` / `care-plan` / `multi-unit` /
    `new-build` branching in `brief.md` can run. Every segment currently gets the homeowner
-   nurture.
+   nurture — a landlord with twelve roofs would get an email about one ceiling stain.
 
-Fix: build the GHL form (fields below), embed it in `site/index.html` above the calendar.
+Fix: build the GHL form, embed it in `site/index.html` above the calendar.
 
-| Dropdown label — "What do you need?" | Tag |
+| Dropdown label — "What do you need?" | Value / tag |
 |---|---|
 | My house has a leak or damage | `repair` |
 | No leak — I want my house checked before the rains | `care-plan` |
@@ -28,7 +77,31 @@ Fix: build the GHL form (fields below), embed it in `site/index.html` above the 
 | I'm building new and have plans | `new-build` |
 
 Single select, required. Plus first name, email, phone (all required — A1 opens with SMS),
-last name and a free-text "anything we should know" optional.
+last name and a free-text "anything we should know" optional. In GHL the sentence goes in
+the option **label** and the tag string in the **value**.
+
+---
+
+## Decisions from the 8 Aug session worth keeping
+
+**Email headers must be live text, never a remote image.** The masthead started as a hosted
+PNG. GHL kept it and the URL returned 200, but Gmail declined to display it. Rebuilt as
+type and colour on a slate cell, which cannot be blocked, proxied or rewritten. The roof
+photo is gone from the header; that is the right trade. `emails/masthead.html` still
+renders the image version if it is ever wanted back.
+
+**One creative source, three ratios.** `carousel/slides/slides.css` switches layout on
+viewport-height media queries, so `render.py`, `--square` and `--story` produce 4:5, 1:1 and
+9:16 from the same HTML. Fix a typo once, re-render three times. Never hand-edit an export.
+
+**Meta placements: everything except Audience Network.** Excluding Stories and Reels to
+dodge a bad crop was the wrong instinct — supply the right crop instead. Audience Network
+stays off because it is third-party apps off Meta and a notorious source of junk clicks on
+a click-optimised campaign.
+
+**Peso figures on the carousel are unverified.** The six per-symptom ranges on slides 2–7
+are new numbers, set inside the published ₱6,500–₱75,000 band. Rommel signs off before
+anything is posted publicly.
 
 ---
 
@@ -42,9 +115,9 @@ last name and a free-text "anything we should know" optional.
 | 4 | GHL pipeline — `Trueline Roof Leads`, 6 stages, 15 leads | ✅ Done |
 | 5 | ClickFunnels landing page | 🔨 **Sections 1–4 built. Resume at Section 5.** |
 | 6 | Instagram carousel | ✅ **Done — 9 slides, rendered to `carousel/out/`** |
-| 7 | Facebook ad draft | 🔨 **Copy + assets + walkthrough ready (`facebook-ad.md`). Build the 4 drafts in Ads Manager.** |
-| 8 | Two pretty HTML emails | ✅ Built · email 1 **live in GHL, test received styled**. Email 2 still to paste into A1. |
-| 9 | Three GHL automations | ⬜ Not started |
+| 7 | Facebook ad draft | 🔨 Assets + copy done (`ad-drafts.md`) · campaign + ad set built · draft 1 part-built, drafts 2–4 to go |
+| 8 | Two pretty HTML emails | 🔨 Both built · **email 1 live in GHL, test arrived styled** · email 2 still to paste into A1 |
+| 9 | Three GHL automations | ⬜ **Next up.** A1 part-built, A2 has email 1 in it |
 | 10 | **Loom capability pitch** — the hero deliverable | ⬜ Not started |
 | 11 | Raven Day 5 walkthrough | ⬜ Not started |
 
