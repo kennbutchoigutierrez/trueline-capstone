@@ -81,6 +81,12 @@ ready-to-send prompt for the Claude browser extension.
 
 ---
 
+## Session logs
+
+- [`sessions/2026-08-08.md`](sessions/2026-08-08.md) — Parts 3 and 4. The carousel render-path
+  decision, every diagram fix, the placement correction, the Vercel and GitHub wiring, the
+  masthead failure and what it taught, and how the missing form was found.
+
 ## Decisions from the 8 Aug session worth keeping
 
 **Email headers must be live text, never a remote image.** The masthead started as a hosted
