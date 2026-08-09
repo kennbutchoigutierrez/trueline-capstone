@@ -380,25 +380,29 @@ lies. Worth saying on camera.
 
 ## What the 9 Aug A1 audit found
 
-A1 was inspected step by step on 9 August. Two defects, both live in the draft, neither
-visible from the canvas at a glance.
+A1 was inspected step by step on 9 August. **One real defect**, not visible from the canvas
+at a glance.
 
-**1 · The If/Else branches were inverted.** The condition read `Last appointment at` **is
-empty** — which is true for people who did *not* book. That branch went to `END`, and the
-else branch sent the nurture email. So the email went to everyone who **had** booked, and the
-people it was written for got nothing.
+**The If/Else branches were inverted.** The condition read `Last appointment at` **is empty**
+— which is true for people who did *not* book. That branch went to `END`, and the else branch
+sent the nurture email. So the email went to everyone who **had** booked, and the people it
+was written for got nothing.
 
-**2 · The Wait was set to 1 minute, not 24 hours.**
+Fixed: the Send Email step moved onto the condition-met branch, `END` onto the else branch,
+condition left untouched.
 
-The two compound into something worse than either alone. A visitor books a roof check → the
-booking creates the contact → 60 seconds later they receive *"Six signs it's a repair, not a
-re-roof,"* an email arguing they should book a roof check. The one person guaranteed not to
-need it is the only person who gets it.
+**The Wait was found at 1 minute. That was deliberate — a test value Kenn set to avoid
+waiting a day between runs, not a mistake.** It has since been set to 24 hours. If A1 is
+being tested again, put it back to 1 minute; the A1 rebuild prompt below specifies 24 hours,
+so it lands correct at build time either way.
 
-Both fixed: the Send Email step moved onto the condition-met branch, `END` onto the else
-branch, condition left untouched, wait set to 24 hours. **This is the argument for the
-never-publish rule** — the draft was wrong for two sessions and nothing on the canvas looked
-wrong. Worth saying on camera.
+**One consequence worth knowing: any A1 test run before 9 Aug was reading the inverted
+branch.** Testing the normal way — create a contact, don't book — would have hit `END` and
+sent nothing, which looks like "the workflow isn't firing" rather than "the branches are
+backwards." If a test seemed not to work, that's why.
+
+**Still the argument for the never-publish rule** — the inversion sat in the draft for two
+sessions and nothing on the canvas looked wrong. Worth saying on camera.
 
 **Also established in that audit:**
 
@@ -547,6 +551,11 @@ the trigger and inserting the branch later, which is exactly the rework the resu
 - [ ] Test A3 with one contact: create it, drag to `Quote Sent`, confirm the day-3 email queues
 - [ ] Test A2 by booking a slot from a phone, confirm email 1 arrives and the card moves
 - [ ] Test A1 by submitting the real form, confirm SMS arrives inside 60 seconds
+- [ ] **Restore every shortened wait.** Testing these means cutting waits down — a 24-hour
+      wait becomes 1 minute so you don't lose a day per run. That's the right way to test and
+      the standard way it ships broken. Before anything is published, walk every Wait step in
+      all three workflows and confirm it reads the real duration: A1 24h / 3d / 1d ·
+      A2 appointment-relative · A3 3d / 4d / 7d
 - [ ] **Delete every test contact** — the board gets filmed
 - [ ] Confirm all three still read **Draft**
 - [ ] On email 1, still unverified from the last session: does `{{contact.first_name}}` actually
