@@ -45,15 +45,20 @@ pass instead of being rebuilt later.
 
 ## 3 · The three automations — the last real build
 
-Specs are already written in `brief.md` and `plan.md`; this is assembly, not design.
+**→ `automations.md`.** Full step-by-step for all three, every SMS and email body written out,
+and a paste-ready extension prompt per workflow. This is assembly now, not design.
 
-- **A1 Speed-to-Lead** — form submit → SMS + email inside 60s → 5-min call task → branch on
-  segment tag → no booking in 24h send email 2 → no booking in 4 days second SMS → Lost +
-  `nurture-may`
-- **A2 Confirm & Show-Up** — booking → stage to Call Booked → email 1 → SMS 24h before →
-  SMS 1h before → no-show fires a two-touch rescue back to Contacted
-- **A3 Quote Follow-Up** — stage to Quote Sent → day 3 "questions on the quotation?" →
-  day 7 the April-vs-August seasonal note → day 14 Lost + `nurture-may`
+**Build order is not the numbering order.** A3 and A2 depend on nothing and can be built today;
+only A1 waits on the form.
+
+| Order | Workflow | Blocked by |
+|---|---|---|
+| 1 | **A3 Quote Follow-Up** — Quote Sent → day 3 → day 7 April-vs-August → day 14 Lost + `nurture-may` | nothing |
+| 2 | **A2 Confirm & Show-Up** — already exists with email 1; add stage move, 24h + 1h SMS, no-show rescue | nothing |
+| 3 | **A1 Speed-to-Lead** — SMS in 60s → 5-min task → 4-way segment branch → 24h email 2 → day 4 SMS → Lost | **the form** |
+
+A1 needs two things only the form can give it: the `Form Submitted` trigger and the custom
+field key its four-way branch reads. Building it on the stand-in trigger means rebuilding it.
 
 ## 4 · Then the two videos
 
@@ -122,7 +127,7 @@ anything is posted publicly.
 | 6 | Instagram carousel | ✅ **Done — 9 slides, rendered to `carousel/out/`** |
 | 7 | Facebook ad draft | 🔨 Assets + copy done (`ad-drafts.md`) · campaign + ad set built · draft 1 part-built, drafts 2–4 to go |
 | 8 | Two pretty HTML emails | 🔨 Both built · **email 1 live in GHL, test arrived styled** · email 2 still to paste into A1 |
-| 9 | Three GHL automations | ⬜ **Next up.** A1 part-built, A2 has email 1 in it |
+| 9 | Three GHL automations | 🔨 **Fully specced in `automations.md`** — A3 and A2 unblocked, build now · A1 waits on the form |
 | 10 | **Loom capability pitch** — the hero deliverable | ⬜ Not started |
 | 11 | Raven Day 5 walkthrough | ⬜ Not started |
 
@@ -260,4 +265,6 @@ automations**. Both halves of that are already respected below.
 | `leads.md` | 15 seeded leads with full intake notes, human-readable |
 | `leads-import.csv` | The GHL import file (contacts imported; opportunities entered manually) |
 | `landing-page.md` | Full 11-section build sheet · cut version · combined prompt · section-by-section prompts · QA checklist |
+| `ghl-form.md` | The segmentation form — field spec, the four dropdown values, why tagging lives in the workflow, extension prompt |
+| `automations.md` | A1 A2 A3 — step-by-step, every SMS and email body, one extension prompt per workflow, build order and what blocks what |
 | `PROGRESS.md` | This file — where you stopped and how to restart |
