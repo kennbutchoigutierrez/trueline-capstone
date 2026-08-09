@@ -20,11 +20,9 @@ Push to `main` and Vercel redeploys the landing page. `vercel.json` sets
 
 ## 1 · Loose ends, ~40 min
 
-**GHL — email 2 into A1.** Workflow `A1 — Speed-to-Lead` was being built when we stopped:
-trigger **Contact Created** (no filters) → **Wait 24h** → **If/Else: has no appointment** →
-**Send Email** on the else branch. Paste `emails/email-2-nurture.html` via the code editor,
-subject `Six signs it's a repair, not a re-roof`, then send yourself a test. Keep the
-workflow unpublished.
+**GHL — email 2 into A1. ✅ Done, and the workflow was audited 9 Aug.** Email 2 was already
+pasted and intact — the earlier note saying otherwise was stale. Two real defects were found
+and fixed in that audit; see `automations.md` → "What the 9 Aug A1 audit found".
 
 Email 1 is already live in **A2 — Appointment Confirm & Show-Up** and its test arrived
 styled. Still to verify on email 1: that `{{contact.first_name}}` actually fills in, and

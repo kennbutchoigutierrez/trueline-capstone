@@ -378,6 +378,59 @@ lies. Worth saying on camera.
 
 ---
 
+## What the 9 Aug A1 audit found
+
+A1 was inspected step by step on 9 August. Two defects, both live in the draft, neither
+visible from the canvas at a glance.
+
+**1 · The If/Else branches were inverted.** The condition read `Last appointment at` **is
+empty** — which is true for people who did *not* book. That branch went to `END`, and the
+else branch sent the nurture email. So the email went to everyone who **had** booked, and the
+people it was written for got nothing.
+
+**2 · The Wait was set to 1 minute, not 24 hours.**
+
+The two compound into something worse than either alone. A visitor books a roof check → the
+booking creates the contact → 60 seconds later they receive *"Six signs it's a repair, not a
+re-roof,"* an email arguing they should book a roof check. The one person guaranteed not to
+need it is the only person who gets it.
+
+Both fixed: the Send Email step moved onto the condition-met branch, `END` onto the else
+branch, condition left untouched, wait set to 24 hours. **This is the argument for the
+never-publish rule** — the draft was wrong for two sessions and nothing on the canvas looked
+wrong. Worth saying on camera.
+
+**Also established in that audit:**
+
+- **Email 2 was already pasted and intact.** The earlier note calling it unpasted was stale.
+  Verified against `emails/email-2-nurture.html`: hidden preheader, live-text masthead, the
+  `Before you sign anything` eyebrow, the `Book a 15-minute roof check` copper CTA, and the
+  footer wordmark all present.
+- **The custom field `What do you need?` already exists** in the sub-account — it appears in
+  the Contact Created trigger's filter list. Its four option values and internal key still
+  need reading; if they match `repair` / `care-plan` / `multi-unit` / `new-build`, the form
+  build in `ghl-form.md` reuses this field instead of creating one.
+- **There is no `Contact Source` filter** on the Contact Created trigger. Available filters:
+  Contact type, Email, Phone, Tag, plus custom fields.
+
+### The interim trigger filter — decided
+
+Filter `Contact Created` on **`What do you need?` is not empty.**
+
+Better than the tag filter considered earlier, because it is semantically true rather than a
+trick: it fires A1 only for someone who told us what they need, which is exactly the
+form-submitter population the workflow is for. It also holds against both failure modes:
+
+- **CSV re-import** — `leads-import.csv` has no `What do you need?` column (checked: its
+  headers are name, contact, city, tags, pipeline, stage, opportunity, source, intake note),
+  so a re-import cannot populate the field and cannot fire A1 on the 15 seeded leads.
+- **Calendar bookings** — the booking widget doesn't populate it either, so a booking no
+  longer starts A1. Correct: A2 owns bookings.
+
+The filter becomes redundant once `Form Submitted` replaces the trigger, and harmless.
+
+---
+
 ## A1 · Speed-to-Lead — after the form exists
 
 **Blocked.** Two things come from `ghl-form.md` being built first:
