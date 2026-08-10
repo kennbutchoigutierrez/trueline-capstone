@@ -3,11 +3,11 @@
 **Last worked:** 11 August 2026 — form built, field migrated, A2 + A2b + A3 built, A1 in progress
 **Remaining:** finish A1 → test pass → form onto the landing page → Loom pitch → Raven walkthrough
 
-**Next action:** ⚠ **open A1 and audit what actually got built** — the extension was stopped
-mid-build and never reported, so its state is unknown. See §1b for the check order; the trigger
-is the one that matters. Then finish A1, then run the **test pass** in `automations.md` — one
-contact through all four workflows, closing twelve verification items and producing every
-screenshot the videos need.
+**Next action:** finish A1's four-way branch — steps 1–4 are saved and the trigger swap is
+clean; the branch panel was left mid-edit with a stuck chevron. **Reload the page first**, then
+re-read branch 1 and build the other three. Full state in §1b. Then the **test pass** in
+`automations.md` — one contact through all four workflows, closing twelve verification items and
+producing every screenshot the videos need.
 
 ---
 
@@ -48,41 +48,61 @@ the titles would have damaged the wrong one. Renamed, but the habit stands.
   converted. Live field is **`contact.what_do_you_need_v2`**, single-select. The old
   `contact.what_do_you_need` is deleted.
 
-## 1b · ⚠ A1 IS IN AN UNKNOWN STATE — verify before building anything
+## 1b · A1 — exactly where the build stopped, 11 Aug
 
-**The extension was stopped mid-build on 11 Aug**, part-way through A1 on workflow
-`96922823-9be4-47e2-bae4-0faffb31a570`. It never reported back, so **nothing about A1 is
-confirmed.** Do not assume any step landed, and do not assume none did.
+The extension reported before stopping, so A1's state is **known**, not a mystery. Workflow
+`96922823-9be4-47e2-bae4-0faffb31a570`, still in Draft.
 
-**Open A1 and read the canvas before touching it.** Check, in this order:
+### ✅ Done and saved
 
-1. **The trigger — this is the dangerous one.** The build swaps `Contact Created` for
-   `Form Submitted`. A stop mid-swap can leave **both** (A1 fires twice per form lead) or
-   **neither** (A1 cannot fire at all). Exactly one trigger should remain, and it should be
-   `Form Submitted` filtered to `Trueline — Roof Check Request`.
-2. **Email 2's HTML step** — it must still be there and untouched. Header wordmark as live
-   text, copper button, not blue. This is the step the whole "edit in place, never rebuild"
-   rule exists to protect.
-3. **The existing Wait** — should read 24 hours, and the existing If/Else should have the Send
-   Email on the condition-**met** branch with `END` on the else. Both were correct on 9 Aug.
-4. **Which new steps exist** — instant email, SMS 1, the 5-minute task, the opportunity move,
-   the four-way branch, and the tail from Wait 3 days onward. Build only what's missing.
-5. **Duplicates** — a partial re-run can leave two of the same step. Cheaper to spot now than
-   to debug from a double-sent email during the test.
+| | |
+|---|---|
+| **Trigger swap — clean** | `Form Submitted` added, filtered to `Trueline — Roof Check Request`, verified saved, **then** `Contact Created` deleted. Only one trigger remains. Never a zero-trigger state |
+| Old custom field | Deleted, after confirming both fields matched their descriptions. Only `contact.what_do_you_need_v2` remains |
+| All four workflow titles | Renamed to match their contents |
+| **Step 1** Send Email | `A1-EMAIL-instant`, subject `Got your roof check request`, body in, placed right after the trigger |
+| **Step 2** Send SMS | `A1-SMS-1`, Taglish body, **saved with no error despite no number and no A2P** |
+| **Step 3** Add Task | Added — two deviations, see below |
+| **Step 4** Update Opportunity | Pipeline `Trueline Roof Leads`, stage `New Lead` |
 
-**Confirmed done before the stop**, so these don't need redoing: the old custom field is
-deleted, the form swap to `contact.what_do_you_need_v2` is verified, and A1 and A2 were renamed
-so their titles match their contents.
+**The trigger being clean is the good news.** That was the one item where a mid-build stop could
+have left A1 double-firing or unable to fire at all, invisibly. It didn't.
 
-**Still never obtained:** the four literal stored values from the If/Else picker (clipped from
-three reports in a row — ask for plain unformatted lines), and the A2b and A3 workflow ids.
+### 🔨 Step 5 — the four-way If/Else, unsaved and mid-edit
 
-**A1 is in Draft, so nothing is running and no waits are ticking.** There is no urgency and no
-damage in progress — only an unverified canvas.
+Field and operator are set (`What do you need?` / `Is`) and **branch 1's value was selected via
+GHL's native picker** — `My house has a leak or damage` — which also answers an open question:
+**the If/Else does offer a picker**, so the long auto-generated values never need hand-typing.
 
-**The three pastes are saved verbatim** in `automations.md` → "The pastes used on 11 Aug". Send
-**paste 3**, the read-only audit — it reports the canvas and stops. **Do not re-send paste 1**,
-which says "add these steps" and would duplicate whatever already landed.
+Then duplicating that branch to make the other three left the panel showing one collapsed
+`Branch` row plus `None`, and the expand chevron stopped responding. **Neither Save nor Cancel
+was clicked**, so nothing is corrupted — but branch 1's condition cannot be visually confirmed.
+
+**Next move: reload the page.** Saved steps survive a reload; only the unsaved panel state is
+lost, and that state is already unreadable. Then re-read branch 1 and continue.
+
+### ⏳ Not started
+
+The other three branches and their Tag/Email actions · steps 9–14 (Wait 3 days → If/Else on
+appointment → `A1-SMS-2` → Wait 1 day → status `Lost` → tag `nurture-may`) · workflow settings
+(re-entry OFF, stop on reply ON) · re-verification of the pre-existing steps 6–8, including that
+email 2's HTML is untouched and the Wait still reads 24 hours.
+
+### ⚠ Two deviations awaiting sign-off
+
+**1 · The task is assigned to Peter Gutierrez, not Rommel.** No `Rommel` user exists in this GHL
+account — Rommel is the demo business's founder, not a seat someone paid for. Peter Gutierrez is
+the only real user. **Accepted:** in a live engagement you'd create the user; on a demo
+sub-account you assign to whoever exists. Worth naming on camera rather than hiding.
+
+**2 · "Due in 5 minutes" is not expressible.** GHL's task due-date offers Days/Weeks/Months/Years
+plus a fixed time-of-day — no minutes, no hours. Set to `0 Days` + `1:01 PM`. **Consequence:** a
+lead arriving after 1:01 PM gets a task that reads overdue the moment it's created. **Accepted,
+and arguably correct** — an overdue speed-to-lead task sorts to the top of the queue, which is
+where it belongs. The real 60-second promise is carried by the instant email, not the task; the
+task is a human nudge.
+
+**Still never obtained:** the A2b and A3 workflow ids.
 
 **The prompt pattern that works** — established across five tasks today, and worth reusing:
 

@@ -703,10 +703,12 @@ registration clears.
 
 ### The pastes used on 11 Aug — kept for troubleshooting
 
-**⚠ Do not re-send paste 1 verbatim.** It says "add these steps," and the extension was stopped
-mid-build, so an unknown number of them already exist. Re-running it as written produces
-duplicate steps — two instant emails, two tasks, two branches. **Audit A1 first** (see
-`PROGRESS.md` §1b), then send the resume variant at the bottom of this section.
+**⚠ Do not re-send paste 1 verbatim.** It says "add these steps," and steps 1–4 are already
+built. Re-running it produces duplicates — two instant emails, two tasks, two opportunity
+moves. **`PROGRESS.md` §1b has the exact state**; resume from the four-way branch only.
+
+Paste 3 below was written when A1's state was unknown. It is now known, so paste 3 is only
+worth sending if you want an independent re-read of the canvas rather than trusting the report.
 
 **Paste 1 — the wrapper that was sent with the A1 build**
 
