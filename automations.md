@@ -15,6 +15,33 @@ already exist. A1 depends on the form in `ghl-form.md`. So:
 
 ---
 
+## ⚠ SMS cannot send from this sub-account — checked 10 Aug
+
+**No phone number is provisioned**, and the harder blocker sits behind it: **A2P/10DLC brand
+and campaign registration is unstarted** in Trust Center. That is a US carrier compliance
+process measured in days, and it gates sending even once a number exists. Telephony runs on
+LC Phone, and provider settings are agency-owner-only — this is ARCA's sub-account, so
+provisioning is neither free nor Kenn's to do.
+
+**Five steps are affected:** A1-SMS-1, A1-SMS-2, A2-SMS-24h, A2-SMS-1h, A2-SMS-noshow.
+**A3 is untouched** — it is email-only, which is part of why it is first in the build order.
+
+**Build the SMS steps anyway.** They cost nothing, they show the designed system on the
+canvas, and GHL generally lets you add and configure a Send SMS action with no number
+attached — it fails at send time, not at build time. If it refuses outright, note it and move
+on.
+
+**Then add an email twin for the two touches that must actually land**, so each workflow has
+something that fires when test-published: A1's instant reply and A2's 24h reminder. The Part 5
+brief anticipates exactly this — *"auto-send an email (and a text too, if your sub-account has
+a phone number set up)"* — so email-first speed-to-lead is the specified path, not a fallback.
+
+**Worth saying on camera.** "The SMS layer is built and sitting behind A2P registration, a US
+carrier requirement that catches every new sub-account including a Philippine business on LC
+Phone" is a sentence that reads as platform fluency rather than an excuse.
+
+---
+
 ## Rules that apply to all three
 
 **Never publish.** Every workflow stays in **Draft** until the whole system is filmed. A
@@ -564,12 +591,17 @@ the trigger and inserting the branch later, which is exactly the rework the resu
 >    assigned to Rommel
 > 3. **Update Opportunity** — pipeline `Trueline Roof Leads`, stage `New Lead`
 > 4. **If/Else, four branches**, reading the custom field `What do you need?`
->    (internal key: `<<PASTE THE FIELD KEY HERE>>`)
+>    (internal key: `contact.what_do_you_need`)
+>
+>    **The values are not what you would guess — use these exactly**, read live from GHL on
+>    10 Aug. Note `careplan` and `multiunit` have no hyphen and `new_build` uses an
+>    underscore. The **tags** keep their hyphens; only the conditions use these strings:
+>
 >    - value `repair` → Add Tag `repair`
->    - value `care-plan` → Add Tag `care-plan`
->    - value `multi-unit` → Add Tag `multi-unit`, then Send Email, subject
+>    - value `careplan` → Add Tag `care-plan`
+>    - value `multiunit` → Add Tag `multi-unit`, then Send Email, subject
 >      `Twelve roofs, one schedule, one report`, plain text
->    - value `new-build` → Add Tag `new-build`, then Send Email, subject
+>    - value `new_build` → Add Tag `new-build`, then Send Email, subject
 >      `Send us the plans and we'll start the takeoff`, plain text
 >
 >    All four branches then continue into step 5.

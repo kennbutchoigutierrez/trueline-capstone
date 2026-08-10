@@ -35,11 +35,10 @@ Phone is required because A1 opens with SMS inside 60 seconds. No phone, no spee
 **Custom field — `What do you need?`**, single select. The sentence is the visitor-facing
 **label**; the short string is the stored **value**.
 
-> ⚠ **This field already exists in the sub-account.** The 9 Aug A1 audit found it in the
-> `Contact Created` trigger's filter list. **Reuse it — do not create a second one.** Two
-> fields with the same name is the worst outcome here: the form would write to one and A1's
-> branch would read the other, and the branch would silently match nothing. What still needs
-> reading is its internal key and whether its four stored values match the table below.
+> ⚠ **This field already exists and was reused on 10 Aug — but it does not match this spec.**
+> See "What GHL actually has" below for the real key, the real values, and two defects that
+> need fixing before A1 can branch on it. **The table below is the design intent, not the
+> current state.**
 
 | Label | Value |
 |---|---|
@@ -58,6 +57,94 @@ house plus a rental, who genuinely belongs there.
 
 **Styling:** background `#F6F4EF`, text `#16232E`, submit button `#C4622D` with off-white
 text, label `Get my free roof check`. No blue.
+
+---
+
+## What GHL actually has — read live, 10 Aug
+
+The form was built on 10 August. The custom field was reused, not recreated. **Three things
+differ from the spec above**, and the first two block A1's segmentation.
+
+**The field**
+
+| | |
+|---|---|
+| Internal key | `contact.what_do_you_need` |
+| Location | Settings → Custom Fields, folder `Form \| trueline roof` |
+| Created | 7 Aug 2026 — consistent with the 9 Aug audit *observing* it; it predates that |
+| Type | **`Dropdown (multiple)` — multi-select** ⚠ |
+
+**The stored values differ from the spec.** These are what A1 must branch on — not the
+hyphenated strings in the table above:
+
+| Label in GHL | Stored value | Spec wanted |
+|---|---|---|
+| Repair | `repair` | `repair` ✅ |
+| Care-plan | `careplan` | `care-plan` |
+| Multi-unit | `multiunit` | `multi-unit` |
+| New build | `new_build` | `new-build` |
+
+**Don't "fix" the values to match the spec — fix the spec.** The values are arbitrary
+internal strings; nothing reads them except A1's branch conditions, which don't exist yet.
+Editing them risks GHL regenerating them and invalidating this table again. The tags A1
+applies stay hyphenated (`care-plan`, `multi-unit`, `new-build`) because those are ours and
+they're referenced in `brief.md`.
+
+### ⚠ Defect 1 — the field is multi-select
+
+A1's four-way branch is built on equality: one lead, one segment, one path. A multi-select
+field lets a visitor tick **both** `repair` and `multiunit`, and then an `is repair` condition
+either fails outright or matches unpredictably depending on how GHL serialises the array.
+The lead falls through every branch, gets no tag, and lands in the default path — silently.
+
+**Fix: change the field to single-select.** The extension left it alone rather than alter a
+shared field unilaterally, which was the right instinct with the information it had. But this
+field lives in a folder named `Form | trueline roof`, was created for this build, and holds no
+contact data yet. Nothing else uses it.
+
+### ⚠ Defect 2 — the option labels are slugs, not the sentences
+
+The visitor currently sees `Repair`, `Care-plan`, `Multi-unit`, `New build`. Those are
+internal vocabulary. The sentences in the spec are load-bearing and the reasoning is in the
+spec section above: naming "house" in the first two keeps single-home owners out of the
+multi-unit branch, and "or more than one house" catches the person with a house plus a rental.
+`Multi-unit` communicates none of that to a homeowner, and `Care-plan` means nothing at all
+to someone who has never heard the term.
+
+**Fix: set the labels to the four sentences.** Watch for GHL regenerating the stored values
+when a label is edited — if the option editor exposes only one string per option rather than
+a label/value pair, then the sentences *become* the values and A1 branches on those instead.
+Either outcome is workable; what matters is reading back what actually saved.
+
+### Not a defect — the pre-existing form
+
+A form named `Trueline — Roof Check Request` already existed in Sites → Forms from 8 Aug with
+only the four standard fields and an unstyled Submit button. Undocumented — a partial earlier
+attempt. The extension completed it in place rather than creating a duplicate. Correct call:
+two same-named forms is the same failure mode as two same-named custom fields.
+
+### The embed
+
+```html
+<iframe
+  src="https://api.leadconnectorhq.com/widget/form/ys8URRJqtAmloGrhk5lo"
+  style="width:100%;height:100%;border:none;border-radius:8px"
+  id="inline-ys8URRJqtAmloGrhk5lo"
+  data-layout="{'id':'inline'}"
+  data-trigger-type="alwaysShow"
+  data-form-name="Trueline — Roof Check Request"
+  data-height="undefined"
+  data-layout-iframe-id="inline-ys8URRJqtAmloGrhk5lo"
+  data-form-id="ys8URRJqtAmloGrhk5lo"
+  title="Trueline — Roof Check Request">
+</iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+```
+
+**`height:100%` with `data-height="undefined"` will collapse the iframe to nothing** inside a
+normal page flow — an iframe with a percentage height needs a parent with a resolved height.
+`form_embed.js` resizes it once it loads, but the pre-load state is a zero-height box. Give
+the iframe a `min-height` when pasting into `site/index.html` so the section doesn't jump.
 
 ---
 
