@@ -286,7 +286,18 @@ Trueline Roof Care · Santa Rosa, Laguna
 
 ---
 
-## A3 · Quote Follow-Up — build this first
+## A3 · Quote Follow-Up — ✅ built 11 Aug
+
+Built by hand. Both If/Else conditions gate on `stage is Quote Sent`, with every subsequent
+step nested under the YES branch and both else branches left empty — an empty branch is how a
+contact who signed exits without another email.
+
+**Open on A3:** whether both If/Else conditions kept the pipeline-stage filter, and whether
+`Update Opportunity` set **status** independently of stage. Both get checked in the test pass.
+
+---
+
+## A3 · Quote Follow-Up — the build sheet
 
 The simplest of the three, and it's the one that recovers money. Nothing blocks it.
 
