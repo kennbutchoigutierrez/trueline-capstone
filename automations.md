@@ -679,10 +679,12 @@ registration clears.
 
 ### Prompt for the extension — A1
 
-> **Send this only after the form from `ghl-form.md` exists**, and fill in the field key first.
->
 > I'm in GoHighLevel, in Automation. There's an existing workflow `A1 — Speed-to-Lead` with a
-> `Contact Created` trigger. **Rebuild it as described below.**
+> `Contact Created` trigger, a Wait, an If/Else and a Send Email step.
+>
+> **Edit that workflow in place. Do not delete and recreate it.** Its existing Send Email step
+> holds a hand-built HTML email that must survive — do not open, re-paste, reformat or
+> "clean up" that step.
 > **Leave it in Draft. Do not publish it.**
 >
 > **First, the trigger.** Add a `Form Submitted` trigger filtered to the form
@@ -695,13 +697,13 @@ registration clears.
 > 1. **Send Email** — subject `Got your roof check request`, plain text, body below labelled
 >    A1-EMAIL-instant. No wait before this; it is the first step and it carries the
 >    60-second promise.
-> 1b. **Send SMS** — body below, labelled A1-SMS-1. **Add it even though it cannot send** —
+> 2. **Send SMS** — body below, labelled A1-SMS-1. **Add it even though it cannot send** —
 >    no number is provisioned and A2P registration is unstarted. It is part of the designed
 >    system. If GHL refuses to save an SMS step, skip it and say so.
-> 2. **Create Task** — title `Call {{contact.first_name}} — roof check`, due in 5 minutes,
+> 3. **Create Task** — title `Call {{contact.first_name}} — roof check`, due in 5 minutes,
 >    assigned to Rommel
-> 3. **Update Opportunity** — pipeline `Trueline Roof Leads`, stage `New Lead`
-> 4. **If/Else, four branches**, reading the custom field `What do you need?`
+> 4. **Update Opportunity** — pipeline `Trueline Roof Leads`, stage `New Lead`
+> 5. **If/Else, four branches**, reading the custom field `What do you need?`
 >    (internal key: **`contact.what_do_you_need_v2`** — NOT `contact.what_do_you_need`, which
 >    is the old multi-select field pending deletion)
 >
@@ -722,23 +724,25 @@ registration clears.
 >    **The tags keep their hyphens.** They are ours and they are referenced in `brief.md`;
 >    only the conditions depend on GHL's generated values.
 >
->    All four branches then continue into step 5.
-> 5. **Wait** 24 hours
-> 6. **If/Else** — condition: contact **has no appointment** booked
->    - If they have one → end
->    - If they don't → continue
-> 7. **Send Email** — subject `Six signs it's a repair, not a re-roof`. Open the code/source
->    editor and paste the full HTML from
->    https://raw.githubusercontent.com/kennbutchoigutierrez/trueline-capstone/main/emails/email-2-nurture.html
->    **Replace the entire body, don't merge into a template. Do not reformat or prettify it** —
->    the inline CSS, the MSO conditional comments and the hidden preheader all look like
->    mistakes and are not.
-> 8. **Wait** 3 days
-> 9. **If/Else** — has no appointment? If they have one → end. Otherwise continue.
-> 10. **Send SMS** — body below, labelled A1-SMS-2
-> 11. **Wait** 1 day
-> 12. **Update Opportunity** — status → `Lost`
-> 13. **Add Tag** — `nurture-may`
+>    All four branches then continue into step 6.
+>
+> **Steps 6, 7 and 8 already exist in the workflow.** Do not rebuild them — the four branches
+> above simply need to feed into the existing Wait. Verify them and leave them alone:
+>
+> 6. **Wait** 24 hours *(exists — confirm it reads 24 hours, not a shortened test value)*
+> 7. **If/Else** — `Last appointment` **is empty** *(exists — confirm the Send Email sits on
+>    the condition-MET branch and `END` on the else branch; this was found inverted on 9 Aug)*
+> 8. **Send Email** — the existing HTML email, `Six signs it's a repair, not a re-roof`.
+>    **Do not touch this step.**
+>
+> **Then continue building from step 9:**
+>
+> 9. **Wait** 3 days
+> 10. **If/Else** — has no appointment? If they have one → end. Otherwise continue.
+> 11. **Send SMS** — body below, labelled A1-SMS-2. Add it even though it cannot send.
+> 12. **Wait** 1 day
+> 13. **Update Opportunity** — status → `Lost`
+> 14. **Add Tag** — `nurture-may`
 >
 > **Workflow settings:** allow re-entry OFF, stop on reply ON.
 >
@@ -747,12 +751,15 @@ registration clears.
 > under "A1 messages" — read that file and use them exactly as written.
 >
 > **Then tell me:**
-> 1. Whether the four-way If/Else matched the custom field values exactly, or whether GHL
->    required a different comparison
+> 1. Whether the four-way If/Else offered a picker for the field's options, and the four
+>    stored VALUES it matched on, quoted exactly
 > 2. Whether the `Contact Created` trigger is actually gone
-> 3. Whether the pasted HTML email survived intact — check the header shows the wordmark as
->    text and the button is copper, not blue
-> 4. Any error exactly as shown
+> 3. That the existing HTML email step was left untouched, and that its header still shows
+>    the wordmark as text with a copper button, not blue
+> 4. Whether the existing Wait reads 24 hours, and which branch of the existing If/Else the
+>    email sits on
+> 5. Whether the two SMS steps saved with no number on the account
+> 6. Any error exactly as shown
 
 ---
 
