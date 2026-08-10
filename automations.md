@@ -701,6 +701,90 @@ primary instant-reply path, with SMS as the addition when a number exists. The S
 on the canvas because it is the designed system and because it will work the day A2P
 registration clears.
 
+### The pastes used on 11 Aug — kept for troubleshooting
+
+**⚠ Do not re-send paste 1 verbatim.** It says "add these steps," and the extension was stopped
+mid-build, so an unknown number of them already exist. Re-running it as written produces
+duplicate steps — two instant emails, two tasks, two branches. **Audit A1 first** (see
+`PROGRESS.md` §1b), then send the resume variant at the bottom of this section.
+
+**Paste 1 — the wrapper that was sent with the A1 build**
+
+```
+I'm in GoHighLevel, in Automation. Read this file and follow the section
+"Prompt for the extension — A1" exactly as written:
+
+https://raw.githubusercontent.com/kennbutchoigutierrez/trueline-capstone/main/automations.md
+
+Five things in that section are deliberate, so you know they are not mistakes
+in my instructions:
+
+1. It says EDIT the existing "A1 — Speed-to-Lead" workflow in place, not rebuild
+   it. That workflow contains a hand-built HTML email that must survive. Do not
+   open, re-paste, reformat or clean up that Send Email step.
+
+2. It says to DELETE the "Contact Created" trigger after adding "Form Submitted".
+   Both must not coexist — a form lead is also a newly created contact, so both
+   would fire and send everything twice.
+
+3. It says to add Send SMS steps even though this sub-account has no phone
+   number and no A2P registration. Intentional. They will not send. If GHL
+   refuses to save an SMS action, skip it and tell me.
+
+4. The custom field key is contact.what_do_you_need_v2. There is an older field
+   with a nearly identical name — if you see two, you have the wrong one. Nothing
+   in GHL will warn you about this.
+
+5. Steps 6, 7 and 8 already exist in the workflow. The four new branches feed
+   into the existing Wait. Verify those three and leave them alone.
+
+Leave the workflow in Draft. Do not publish it.
+```
+
+**Paste 2 — the go-ahead sent after it read the file back**
+
+```
+Confirmed, proceed now. Trigger reads Contact Created and the id matches, so you
+are in the right workflow.
+
+Order: add Form Submitted → verify it saved → delete Contact Created → build the
+rest. Never leave the workflow with zero triggers.
+
+Two additions to your report when you're done:
+  - A2b's and A3's workflow ids (you confirmed their titles, but I don't have the
+    ids yet — I'm recording all four so nobody has to identify them by name again)
+  - The four literal stored VALUES from the If/Else picker. This has been clipped
+    from three reports in a row, so paste them as four plain lines with no
+    formatting:  label = value
+```
+
+**Paste 3 — the resume variant. Send THIS next, not paste 1.**
+
+```
+I'm in GoHighLevel. A previous session was building the workflow
+"A1 — Speed-to-Lead", id 96922823-9be4-47e2-bae4-0faffb31a570, and was
+interrupted part-way through. I do not know which steps were applied.
+
+DO NOT BUILD ANYTHING YET. First open that workflow and report its canvas to me
+exactly as it stands, top to bottom:
+
+  1. Every trigger on it, with its filters. I need to know whether it has
+     "Form Submitted", "Contact Created", both, or neither.
+  2. Every step in order, with its type and its title or subject line.
+  3. Whether any step appears twice.
+  4. For the Send Email step titled "Six signs it's a repair, not a re-roof":
+     confirm it still exists, and that its header shows the wordmark as live
+     text with a copper button, not blue. Do not open it in an editor that might
+     reformat it — read it and close it.
+  5. Whether the existing Wait step reads 24 hours.
+  6. For the existing If/Else on "Last appointment is empty": which branch the
+     Send Email sits on, and which branch ends.
+
+Report all six, then stop. I will tell you what to build after I see it.
+
+Leave the workflow in Draft. Do not publish it. Do not delete or add anything.
+```
+
 ### Prompt for the extension — A1
 
 > I'm in GoHighLevel, in Automation. There's an existing workflow `A1 — Speed-to-Lead` with a

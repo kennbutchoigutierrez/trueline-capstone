@@ -80,6 +80,10 @@ three reports in a row — ask for plain unformatted lines), and the A2b and A3 
 **A1 is in Draft, so nothing is running and no waits are ticking.** There is no urgency and no
 damage in progress — only an unverified canvas.
 
+**The three pastes are saved verbatim** in `automations.md` → "The pastes used on 11 Aug". Send
+**paste 3**, the read-only audit — it reports the canvas and stops. **Do not re-send paste 1**,
+which says "add these steps" and would duplicate whatever already landed.
+
 **The prompt pattern that works** — established across five tasks today, and worth reusing:
 
 1. **Point at the raw GitHub URL**, never inline the content
