@@ -341,7 +341,7 @@ much higher on multi-unit and new-build.
 | **Landing page — live, public** | https://trueline-roof-care.vercel.app | ✅ **ad destination** |
 | Source repo | https://github.com/kennbutchoigutierrez/trueline-capstone | ✅ public |
 | Landing page — source | `site/index.html`, auto-deploys on push to `main` | ✅ deployed |
-| Landing page — ClickFunnels build | Sections 1–4 built, platform-fluency proof | 🔨 |
+| Landing page — hand-built HTML on Vercel | ClickFunnels build abandoned at Sections 1–4 | ✅ |
 | GHL pipeline — `Trueline Roof Leads` | 6 stages, 15 seeded leads | ✅ |
 | Instagram carousel | `carousel/out/slide-01…09.png` · build sheet `carousel/carousel.md` | ✅ 9 slides |
 | HTML emails ×2 | `emails/email-1-booked.html`, `emails/email-2-nurture.html` · `emails/emails.md` | ✅ built |

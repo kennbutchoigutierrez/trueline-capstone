@@ -46,6 +46,31 @@ the titles would have damaged the wrong one. Renamed, but the habit stands.
   converted. Live field is **`contact.what_do_you_need_v2`**, single-select. The old
   `contact.what_do_you_need` is deleted.
 
+## 1b · In flight with the Claude browser extension — 11 Aug
+
+**Task:** build A1 on workflow `96922823-9be4-47e2-bae4-0faffb31a570`. Field checks and the
+form swap are confirmed done; the old custom field is deleted; A1 and A2 have been renamed to
+match their contents.
+
+**Awaiting from it:** the four literal stored values from the If/Else picker (clipped from three
+reports running — ask for plain unformatted lines), the A2b and A3 workflow ids, confirmation
+`Contact Created` is gone, and that the existing HTML email step went untouched.
+
+**The prompt pattern that works** — established across five tasks today, and worth reusing:
+
+1. **Point at the raw GitHub URL**, never inline the content
+2. **Pre-authorise everything that will look like a mistake**, or it stops to query each one:
+   *add the SMS step even though it cannot send · delete the other trigger · edit in place, do
+   not rebuild · the key is the `_v2` one*
+3. **Name a stop condition** rather than a blanket "check with me" — "delete it if it matches
+   this exactly; stop and show me if anything differs" saves a round trip without losing the
+   safety
+4. **End with a numbered report-back list**, and ask for critical strings as plain lines
+
+**It reads the file back to you before acting** and refuses to execute web-content instructions
+without an explicit go-ahead. That costs one round trip and is worth it — it caught the swapped
+workflow titles, the locked field type and the key collision, and was right all three times.
+
 ## 2 · The segmentation form — ✅ built
 
 Form `Trueline — Roof Check Request`, embed id **`ys8URRJqtAmloGrhk5lo`**. Four standard
@@ -144,7 +169,7 @@ anything is posted publicly.
 | 2 | `plan.md` — pipeline, page promise, email + automation sketch | ✅ Done |
 | 3 | GHL calendar — `15-min Roof Check Call` | ✅ Done |
 | 4 | GHL pipeline — `Trueline Roof Leads`, 6 stages, 15 leads | ✅ Done |
-| 5 | ClickFunnels landing page | 🔨 **Sections 1–4 built. Resume at Section 5.** |
+| 5 | Landing page | ✅ **Done — hand-built HTML on Vercel.** ClickFunnels abandoned, see below |
 | 6 | Instagram carousel | ✅ **Done — 9 slides, rendered to `carousel/out/`** |
 | 7 | Facebook ad draft | 🔨 Assets + copy done (`ad-drafts.md`) · campaign + ad set built · draft 1 part-built, drafts 2–4 to go |
 | 8 | Two pretty HTML emails | 🔨 Both built · **email 1 live in GHL, test arrived styled** · email 2 still to paste into A1 |
@@ -183,31 +208,33 @@ Lost/nurture handled by opportunity **status** + tag `nurture-may`, not by extra
 Board totals: **₱970,700 open · ₱36,000 won · ₱182,000 lost** · 15 opportunities.
 Non-open cards: Villanueva `Lost`, Sarmiento `Lost`, Cordero `Won`.
 
-**Landing page** — ClickFunnels funnel `Trueline — Free Roof Check`, blank-page build.
-URL: _not published yet_
+**Landing page** — hand-built HTML, `site/index.html`, deployed to
+https://trueline-roof-care.vercel.app. Live and public.
 
 ---
 
-## Resume instructions — landing page
+## The landing page — ClickFunnels abandoned, kept on the record
 
-Sections 1–4 are built (announcement bar, hero, the problem, what the free check includes).
-**Next: Section 5, Rommel's story.**
+**What shipped:** a hand-built HTML page in `site/index.html`, deployed to Vercel, live at
+https://trueline-roof-care.vercel.app. Every push to `main` redeploys it.
 
-Two ways to continue, both in `landing-page.md`:
+**What was abandoned:** the ClickFunnels funnel `Trueline — Free Roof Check`, a blank-page
+build that reached Sections 1–4 (announcement bar, hero, the problem, what the free check
+includes) and was never published. `plan.md` still records the original decision as
+*"RESOLVED — ClickFunnels, per Part 2 instructions"*; that decision was reversed in practice.
 
-1. **Combined prompt** — the "SINGLE COMBINED PROMPT" block. Edit its opening line from
-   *"Sections 1 and 2 are already built"* to **"Sections 1 through 4 are already built. Build
-   Sections 5 through 11."** and delete the Section 3 and Section 4 blocks from it before sending.
-2. **Section by section** — use Prompt 0 (design system) first if it's a fresh conversation, then
-   Prompts 3–9, which map to Sections 5, 6, 7, 8, 9, 10, 11.
+**Kept deliberately, not deleted.** The abandoned track stays documented because it is part of
+the build history, because `landing-page.md`'s section prompts and QA checklist still describe
+the page that actually shipped, and because the partial funnel may still exist in the
+ClickFunnels account — an unpublished draft nobody remembers is exactly the kind of thing that
+resurfaces later. If that account is being decommissioned, delete the funnel there rather than
+just the note here.
 
-Building the **cut version**: §8 Proof is one testimonial + the stat bar, §9 FAQ is three
-questions. Everything else full.
-
-**Before publishing:** all four CTAs → the calendar link · hero's "Building new?" link jumps to
-the `plans` anchor in §7 · no blue · only Fraunces + Inter · no exclamation points · mobile pass
-(H1 34px, H2 28px, 3-col rows stack) · test-book from a phone, then **delete the test contact**
-so the pipeline board stays clean for filming.
+**The QA rules still apply to the HTML page and are still worth checking before filming:** all
+CTAs point at the calendar link · the hero's "Building new?" link jumps to the `plans` anchor ·
+no blue anywhere · only Fraunces + Inter · no exclamation points · mobile pass (H1 34px, H2
+28px, 3-col rows stack) · test-book from a phone, then **delete the test contact** so the
+pipeline board stays clean.
 
 ---
 

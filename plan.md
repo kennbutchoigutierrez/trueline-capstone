@@ -161,7 +161,10 @@ own defaults.
 
 ## 7. Open decisions
 
-1. ~~Landing page: HTML or ClickFunnels?~~ **RESOLVED — ClickFunnels**, per Part 2 instructions.
+1. ~~Landing page: HTML or ClickFunnels?~~ **Resolved twice.** First to ClickFunnels per Part 2
+   instructions; then **reversed in practice** — the ClickFunnels funnel reached Sections 1–4,
+   was never published, and was abandoned in favour of a hand-built HTML page. What shipped is
+   `site/index.html` on Vercel. See `PROGRESS.md` → "The landing page — ClickFunnels abandoned".
    Copy and styling get specced here, built in the CF editor.
 2. **Does Make earn its place?** Not required by the bar. The `new-build` plan-set scenario is
    the only one that isn't decoration.
