@@ -378,6 +378,28 @@ lies. Worth saying on camera.
 
 ---
 
+## A1 branch logic — verified live, 10 Aug
+
+The audit's If/Else fix was confirmed in the GHL canvas on 10 August. Current stand-in reads:
+
+```
+Contact Created (no filter)
+  └─ Wait
+       └─ If/Else: Last appointment is empty
+            ├─ condition met (never booked) → Send email 2   ✅ correct
+            └─ else            (they booked) → END           ✅ correct
+```
+
+That is the corrected orientation — the nurture reaches non-bookers, and someone who already
+booked doesn't get an email telling them to book. **Still open on it:** the trigger has no
+filter (see below — the intended one turned out not to be buildable), and the Wait duration
+wants an eyeball to confirm it reads 24 hours rather than the 1-minute test value.
+
+Scope check: this stand-in is roughly a fifth of A1. SMS 1, the 5-minute call task, the
+four-way segment branch, the day-4 SMS and the Lost close all arrive with the form rebuild.
+
+---
+
 ## What the 9 Aug A1 audit found
 
 A1 was inspected step by step on 9 August. **One real defect**, not visible from the canvas
@@ -415,15 +437,14 @@ sessions and nothing on the canvas looked wrong. Worth saying on camera.
   need reading; if they match `repair` / `care-plan` / `multi-unit` / `new-build`, the form
   build in `ghl-form.md` reuses this field instead of creating one.
 - **There is no `Contact Source` filter** on the Contact Created trigger. Available filters:
-  Contact type, Email, Phone, Tag, plus custom fields.
+  Contact type, Email, Phone, Tag, plus custom fields. **Custom fields are selectable but
+  offer no emptiness operator** — confirmed live 10 Aug, see the section below.
 
-### The interim trigger filter — decided
+### The interim trigger filter — decided 9 Aug, overturned 10 Aug
 
-Filter `Contact Created` on **`What do you need?` is not empty.**
-
-Better than the tag filter considered earlier, because it is semantically true rather than a
-trick: it fires A1 only for someone who told us what they need, which is exactly the
-form-submitter population the workflow is for. It also holds against both failure modes:
+**The decision was: filter `Contact Created` on `What do you need?` is not empty.** The
+reasoning was sound — it fires A1 only for someone who told us what they need, which is the
+form-submitter population the workflow is for, and it holds against both failure modes:
 
 - **CSV re-import** — `leads-import.csv` has no `What do you need?` column (checked: its
   headers are name, contact, city, tags, pipeline, stage, opportunity, source, intake note),
@@ -431,7 +452,33 @@ form-submitter population the workflow is for. It also holds against both failur
 - **Calendar bookings** — the booking widget doesn't populate it either, so a booking no
   longer starts A1. Correct: A2 owns bookings.
 
-The filter becomes redundant once `Form Submitted` replaces the trigger, and harmless.
+**It is not buildable.** Checked live in the trigger on 10 Aug: custom fields *are* offered
+in the filter field dropdown, so `What do you need?` is selectable — but the operator list
+has **no `is empty` / `is not empty`**. There is no way to express "has any value."
+
+Equality operators can't stand in. Four `is <value>` filters on one trigger are **AND**-ed,
+so a contact would have to be all four segments at once and nothing would ever fire. The
+technically correct workaround is four separate `Contact Created` triggers on the workflow,
+one per value, since multiple triggers OR — but that's four triggers to maintain on a
+trigger that gets deleted the moment the form ships.
+
+**What to do instead: filter on `Tag` = `form-lead`.** Tag is available today, and this is
+not the trick the earlier tag idea was:
+
+- **Now** — nothing carries that tag, so A1 fires on nobody. A stronger stop than
+  `is not empty` was, not a weaker one.
+- **After the form** — GHL forms apply one tag to every submission (see `ghl-form.md`). Set
+  it to `form-lead` and the filter reads as "this contact came from the form."
+
+If the tag isn't selectable because it doesn't exist yet, create it in **Settings → Tags**.
+
+**Or accept no filter.** The trigger is deleted, not extended, when `Form Submitted` lands,
+and the never-publish rule is the real protection. This was belt-and-braces on a draft with
+a few days to live. Don't spend build time here.
+
+**The lesson worth keeping:** the 9 Aug decision was recorded as "decided" without anyone
+opening the operator dropdown. A filter that reads well in a doc and doesn't exist in the UI
+is worse than no filter, because the doc says you're covered.
 
 ---
 
