@@ -97,10 +97,32 @@ field lets a visitor tick **both** `repair` and `multiunit`, and then an `is rep
 either fails outright or matches unpredictably depending on how GHL serialises the array.
 The lead falls through every branch, gets no tag, and lands in the default path — silently.
 
-**Fix: change the field to single-select.** The extension left it alone rather than alter a
-shared field unilaterally, which was the right instinct with the information it had. But this
-field lives in a folder named `Form | trueline roof`, was created for this build, and holds no
-contact data yet. Nothing else uses it.
+**The field type cannot be changed — checked 11 Aug.** GHL hard-locks Field type, Add-to-object
+and Folder once a custom field is created. The selector in the Update Field modal is disabled;
+there is no warning to click through because there is no path at all. The only route is a new
+field.
+
+**Fix: replace the field.** Migration order matters — rename first, or you recreate the
+duplicate-name problem this file already dodged once:
+
+1. Rename the old field's label to `What do you need OLD - delete me`
+2. Create a new **single-select** contact field labelled `What do you need?`, same folder,
+   four options carrying the sentences as labels and `repair` / `careplan` / `multiunit` /
+   `new_build` as values
+3. **Read the new internal key** — GHL generates a fresh one, it will *not* be
+   `contact.what_do_you_need`, and A1's four branch conditions read it
+4. Swap it into the form at position 5, between Phone and "Anything we should know?"
+5. Verify the form previews and the dropdown accepts only one selection
+6. **Only then** delete the old field — until the swap is verified, the old field is the one
+   place the original configuration still exists
+
+**It costs nothing right now and never will be cheaper.** No submissions exist, the form is
+not embedded on the site, and A1 does not reference the field yet.
+
+**Option not taken: keep multi-select and branch with `contains`**, ordered most-specific-first
+so a landlord who ticks two options lands in `multiunit`. Rejected because it depends on GHL
+offering a `contains` operator on a multi-select in If/Else — and this build has now assumed an
+operator existed twice and been wrong both times.
 
 ### ⚠ Defect 2 — the option labels are slugs, not the sentences
 
