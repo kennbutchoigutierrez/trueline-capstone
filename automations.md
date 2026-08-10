@@ -15,6 +15,30 @@ already exist. A1 depends on the form in `ghl-form.md`. So:
 
 ---
 
+## The four workflows in GHL — IDs, because names drift
+
+**Identify workflows by ID and by canvas content, never by title.** On 11 Aug the A1 and A2
+titles were found attached to each other's workflows — the descriptive halves were right
+("Speed-to-lead", "customer booked") but the numbers were swapped. Caught only because the
+extension opened each canvas instead of trusting the tab.
+
+| Workflow | GHL id | Identify by this content |
+|---|---|---|
+| **A1 — Speed-to-Lead** | `96922823-9be4-47e2-bae4-0faffb31a570` | `Contact Created` → Wait → If/Else `Last appointment is empty` → Send Email |
+| **A2 — Appointment Confirm & Show-Up** | `11f3fabb-…` | `Customer Booked Appointment` filtered to `15-min Roof Check Call` |
+| **A2b — No-Show Rescue** | *unrecorded* | `Appointment Status = No Show` |
+| **A3 — Quote Follow-Up** | *unrecorded* | `Opportunity Stage Changed` → `Quote Sent` |
+
+**The numbering in this file is authoritative** — `brief.md` and `plan.md` use it too. Renaming
+two workflows in GHL is cheaper than renumbering three documents, and the presentation needs one
+vocabulary.
+
+**Why this was dangerous, not just untidy.** The A1 build sheet says "do not touch the existing
+Send Email step" because it holds hand-built HTML. Both A1 and A2 contain an HTML email. An
+agent that trusted the titles would have edited the wrong workflow and damaged the wrong email.
+
+---
+
 ## ⚠ SMS cannot send from this sub-account — checked 10 Aug
 
 **No phone number is provisioned**, and the harder blocker sits behind it: **A2P/10DLC brand
