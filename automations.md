@@ -355,7 +355,28 @@ these sequences embarrass the business.
 
 ---
 
-## A2 · Confirm & Show-Up — extend what exists
+## A2 · Confirm & Show-Up — ✅ built 11 Aug
+
+**Built by hand, not through the extension.** A2 was extended with the stage move, the
+appointment-relative waits, the new 24h reminder email and both SMS steps. The no-show rescue
+went into its own workflow, `A2b — No-Show Rescue`.
+
+**Why A2b is separate, and it isn't a compromise.** A workflow can hold several triggers, so
+adding `Appointment Status Changed → No Show` to A2 looks possible — but every trigger on a
+GHL workflow feeds the *same* first step. A no-show would re-enter at the top and receive the
+stage move to `Call Booked`, the confirmation email and both reminders, for a call that
+already didn't happen. Two workflows that each do one thing beat one that half-does both.
+
+**Still unverified on A2** — these decide whether it works rather than whether it looks right:
+
+- [ ] Did the Wait steps save as **appointment-relative**, or fall back to fixed delays?
+- [ ] Which **appointment-time merge token** did GHL's picker produce?
+- [ ] Did the two **SMS steps save** with no number on the account?
+- [ ] Was the trigger's **calendar filter** already present, or added?
+
+---
+
+## A2 · Confirm & Show-Up — the build sheet
 
 **This workflow already exists** with email 1 in it and a test that arrived styled. You're
 adding to it, not rebuilding it. Don't recreate it — you'll end up with two.

@@ -136,7 +136,7 @@ anything is posted publicly.
 | 6 | Instagram carousel | ✅ **Done — 9 slides, rendered to `carousel/out/`** |
 | 7 | Facebook ad draft | 🔨 Assets + copy done (`ad-drafts.md`) · campaign + ad set built · draft 1 part-built, drafts 2–4 to go |
 | 8 | Two pretty HTML emails | 🔨 Both built · **email 1 live in GHL, test arrived styled** · email 2 still to paste into A1 |
-| 9 | Three GHL automations | 🔨 **Fully specced in `automations.md`** — A3 and A2 unblocked, build now · A1 waits on the form |
+| 9 | Three GHL automations | 🔨 **A2 + A2b built 11 Aug** · A3 next · A1 unblocked — the form exists, field type needs fixing first |
 | 10 | **Loom capability pitch** — the hero deliverable | ⬜ Not started |
 | 11 | Raven Day 5 walkthrough | ⬜ Not started |
 
