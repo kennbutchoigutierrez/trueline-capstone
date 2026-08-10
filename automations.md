@@ -149,6 +149,37 @@ Trueline Roof Care · Santa Rosa, Laguna
 **A2-EMAIL-1 — on booking** → `emails/email-1-booked.html` — **already live in A2.**
 Subject: `Your roof check is booked`
 
+**A2-EMAIL-24h — the email twin of A2-SMS-24h, plain text.** Added 10 Aug because SMS cannot
+send from this sub-account. Carries the same job as the SMS — reduce no-shows, get them to
+bring evidence — in English, per the voice rule that body copy is English and only SMS and ad
+hooks are Taglish.
+Subject: `Your roof check is tomorrow`
+
+```
+Hi {{contact.first_name}},
+
+Quick reminder — your roof check call is tomorrow at {{appointment.start_time}}. It's 15
+minutes on the phone, nothing more.
+
+Three things worth having ready, if you have them:
+
+A photo of the stain or the damage. Even a bad phone photo taken from the floor tells me
+more than a description does.
+
+Any quotation you've already received from another contractor. I'll tell you straight
+whether it's fair, including when it is.
+
+Your roof plan, if you're building.
+
+None of it is required. It just means we spend the 15 minutes on your roof instead of on
+questions.
+
+If the timing no longer works, reply to this email and we'll move it.
+
+Rommel Bautista
+Trueline Roof Care · Santa Rosa, Laguna
+```
+
 **A2-SMS-24h** (~250 chars)
 
 ```
@@ -336,11 +367,14 @@ adding to it, not rebuilding it. Don't recreate it — you'll end up with two.
 Appointment booked
   ├─ Move opportunity → Call Booked
   ├─ A2-EMAIL-1  ◄── already built
-  ├─ SMS 24h before appointment ──► A2-SMS-24h
-  ├─ SMS 1h before appointment ───► A2-SMS-1h
+  ├─ Wait until 24h before appointment
+  │    ├─ A2-EMAIL-24h  ◄── fires
+  │    └─ A2-SMS-24h    ◄── builds, cannot send (no A2P)
+  ├─ Wait until 1h before appointment
+  │    └─ A2-SMS-1h     ◄── builds, cannot send
   └─ Appointment status = no-show
-       ├─ Wait 15 min ──► A2-SMS-noshow
-       ├─ Wait 1 day ───► A2-EMAIL-noshow
+       ├─ Wait 15 min ──► A2-SMS-noshow   ◄── builds, cannot send
+       ├─ Wait 1 day ───► A2-EMAIL-noshow ◄── fires
        └─ Move opportunity → Contacted
 ```
 
@@ -373,9 +407,14 @@ lies. Worth saying on camera.
 >    Put this BEFORE the existing Send Email step.
 > 2. After the existing email: **Wait** — until **24 hours before** the appointment start time.
 >    Use the appointment-relative wait mode, not a fixed 24-hour delay.
-> 3. **Send SMS** — body below, labelled A2-SMS-24h
-> 4. **Wait** — until **1 hour before** the appointment start time
-> 5. **Send SMS** — body below, labelled A2-SMS-1h
+> 3. **Send Email** — subject `Your roof check is tomorrow`, plain text, body below labelled
+>    A2-EMAIL-24h. This one carries the reminder, because SMS cannot send from this
+>    sub-account (no number, A2P registration unstarted).
+> 4. **Send SMS** — body below, labelled A2-SMS-24h. **Add it even though it cannot send** —
+>    it is part of the designed system. If GHL refuses to save an SMS step with no number
+>    attached, skip it and tell me.
+> 5. **Wait** — until **1 hour before** the appointment start time
+> 6. **Send SMS** — body below, labelled A2-SMS-1h. Same note as above.
 >
 > **Then the no-show rescue.** If GHL lets an `Appointment Status = No Show` branch live in
 > this same workflow, add it here. If it needs its own workflow, create one named
