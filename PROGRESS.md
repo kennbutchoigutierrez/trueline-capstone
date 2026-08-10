@@ -1,10 +1,11 @@
 # PROGRESS.md — Trueline Roof Care capstone
 
-**Last worked:** 9 August 2026 — A1 audited and fixed, interim trigger filter decided
-**Remaining:** the form → the 3 GHL automations → Raven Day 5 walkthrough → Loom capability pitch
+**Last worked:** 11 August 2026 — form built, field migrated, A2 + A2b + A3 built, A1 in progress
+**Remaining:** finish A1 → test pass → form onto the landing page → Loom pitch → Raven walkthrough
 
-**Next action:** send the form prompt in `ghl-form.md` to the extension. While it's in flight,
-build **A3** — it's unblocked and fully specced.
+**Next action:** finish A1 (extension is mid-build on workflow `96922823`), then run the
+**test pass** in `automations.md` — one contact through all four workflows. That single run
+closes twelve open verification items and produces every screenshot the videos need.
 
 ---
 
@@ -21,53 +22,60 @@ build **A3** — it's unblocked and fully specced.
 Push to `main` and Vercel redeploys the landing page. `vercel.json` sets
 `outputDirectory` to `site`, so the deploy serves that folder from the repo root.
 
-## 1 · Loose ends, ~40 min
+## 1 · Part 5 state — four workflows
 
-**GHL — email 2 into A1. ✅ Done, and the workflow was audited 9 Aug.** Email 2 was already
-pasted and intact — the earlier note saying otherwise was stale. Two real defects were found
-and fixed in that audit; see `automations.md` → "What the 9 Aug A1 audit found".
-
-Email 1 is already live in **A2 — Appointment Confirm & Show-Up** and its test arrived
-styled. Still to verify on email 1: that `{{contact.first_name}}` actually fills in, and
-that GHL is not appending a second unsubscribe under the one in the footer.
-
-**Meta Ads Manager — 4 drafts.** Campaign and ad set exist. Draft 1 `six-signs-carousel`
-had its five cards, headlines and descriptions uploaded; still needs primary text, URL,
-display link, the Stories 9:16 swap, and save-as-draft. Drafts 2–4 not started — duplicate
-draft 1 at ad level three times and swap creative and copy. **Everything paste-ready is in
-`ad-drafts.md`.** Never click Publish; close with **X → Save as draft**.
-
-## 2 · The segmentation form, then the three automations
-
-**Build the form first** — see `ghl-form.md`, it has a paste-ready extension prompt. Send
-me the embed code and the custom field key and the form goes into `site/index.html`. Doing
-it before the automations means A1 gets its real trigger and its segment branching in one
-pass instead of being rebuilt later.
-
-**The prompt now leads with a check, not a create.** The 9 Aug audit found `What do you need?`
-already in the sub-account, so the prompt tells the extension to reuse it and report its key
-and stored values. Creating a duplicate would have the form writing to one field and A1's
-branch reading the other — a branch that silently matches nothing.
-
-**A3 is not blocked by any of this.** Build it in the same sitting; the form round-trip is
-the long pole.
-
-## 3 · The three automations — the last real build
-
-**→ `automations.md`.** Full step-by-step for all three, every SMS and email body written out,
-and a paste-ready extension prompt per workflow. This is assembly now, not design.
-
-**Build order is not the numbering order.** A3 and A2 depend on nothing and can be built today;
-only A1 waits on the form.
-
-| Order | Workflow | Blocked by |
+| Workflow | GHL id | State |
 |---|---|---|
-| 1 | **A3 Quote Follow-Up** — Quote Sent → day 3 → day 7 April-vs-August → day 14 Lost + `nurture-may` | nothing |
-| 2 | **A2 Confirm & Show-Up** — already exists with email 1; add stage move, 24h + 1h SMS, no-show rescue | nothing |
-| 3 | **A1 Speed-to-Lead** — SMS in 60s → 5-min task → 4-way segment branch → 24h email 2 → day 4 SMS → Lost | **the form** |
+| **A1 — Speed-to-Lead** | `96922823-9be4-47e2-bae4-0faffb31a570` | 🔨 mid-build 11 Aug |
+| **A2 — Appointment Confirm & Show-Up** | `11f3fabb-…` | ✅ built |
+| **A2b — No-Show Rescue** | *unrecorded* | ✅ built |
+| **A3 — Quote Follow-Up** | *unrecorded* | ✅ built |
 
-A1 needs two things only the form can give it: the `Form Submitted` trigger and the custom
-field key its four-way branch reads. Building it on the stand-in trigger means rebuilding it.
+⚠ **Identify workflows by id and canvas content, never by title.** A1's and A2's titles were
+found attached to each other's workflows on 11 Aug — both contain an HTML email, so trusting
+the titles would have damaged the wrong one. Renamed, but the habit stands.
+
+**Three platform realities that reshaped the build**, all in `automations.md` and `ghl-form.md`:
+
+- **SMS cannot send.** No number, and A2P/10DLC registration unstarted — a US carrier process
+  measured in days. Five SMS steps stay on the canvas as designed; **email twins** carry A1's
+  instant reply and A2's 24h reminder. The Part 5 brief specifies email-first anyway.
+- **A1's trigger filter doesn't exist.** GHL offers no `is not empty` operator. A1 runs
+  **unfiltered, deliberately** — the trigger is deleted when `Form Submitted` lands.
+- **Custom field type is locked after creation.** The multi-select had to be replaced, not
+  converted. Live field is **`contact.what_do_you_need_v2`**, single-select. The old
+  `contact.what_do_you_need` is deleted.
+
+## 2 · The segmentation form — ✅ built
+
+Form `Trueline — Roof Check Request`, embed id **`ys8URRJqtAmloGrhk5lo`**. Four standard
+fields, the v2 dropdown at position 5, the free-text field, redirect to the booking calendar,
+brand styling applied. Not published to any funnel.
+
+**Still to do: paste the embed into `site/index.html` above the final CTA at ~line 586** (the
+copper band). Give the iframe a `min-height` — `height:100%` with `data-height="undefined"`
+collapses to a zero-height box until `form_embed.js` resizes it. That push also gives the
+first real proof the dropdown renders single-select to a visitor.
+
+## 3 · The test pass — the last real build step
+
+**→ `automations.md` → "The test pass".** One contact submits the form, books, no-shows, and
+moves to `Quote Sent`, walking through all four workflows in sequence.
+
+**Publishing is safe now, and wasn't before.** The never-publish rule existed because an
+unfiltered `Contact Created` would fire A1 on a re-import of the 15 seeded leads. `Form
+Submitted` removes that — a CSV import doesn't submit a form.
+
+Shorten the waits from the table in that section, run it, **restore every one**, delete the
+test contact. Grab the screenshots while it's mid-flight; that's the only window they exist in.
+
+## 3b · Meta Ads Manager — still open from Part 3
+
+Campaign and ad set exist. Draft 1 `six-signs-carousel` has its five cards, headlines and
+descriptions; still needs primary text, URL, display link, the Stories 9:16 swap, and
+save-as-draft. Drafts 2–4 not started — duplicate draft 1 at ad level three times and swap
+creative and copy. **Everything paste-ready is in `ad-drafts.md`.** Never click Publish; close
+with **X → Save as draft**.
 
 ## 4 · Then the two videos
 
@@ -76,27 +84,31 @@ list is further down this file.
 
 ---
 
-## ⚠ Open architecture gap — the landing page has no form
+## The architecture gap — closed in GHL, one push from closed on the page
 
-Every CTA in `site/index.html` links straight to the booking widget, so a visitor who does
-not book never becomes a contact. Two consequences:
+**Was:** every CTA in `site/index.html` linked straight to the booking widget, so a visitor who
+didn't book never became a contact — which left A1's nurture with no real audience and made the
+four-way segment branch unrunnable.
 
-1. **A1's nurture has no real audience.** It is triggered on `Contact Created` as a
-   stand-in; the designed trigger is `Form Submitted`. When the form exists, **replace**
-   the trigger — do not add it alongside, or form leads fire both and get the email twice.
-2. **No segment tags exist**, so none of the `repair` / `care-plan` / `multi-unit` /
-   `new-build` branching in `brief.md` can run. Every segment currently gets the homeowner
-   nurture — a landlord with twelve roofs would get an email about one ceiling stain.
+**Now:** the form exists and the segmentation field is single-select. A1's trigger becomes
+`Form Submitted`, and the branch reads `contact.what_do_you_need_v2`.
 
-**Fix: → `ghl-form.md`.** Full field spec, the four dropdown labels and values, the
-redirect-to-calendar behaviour, how the tagging actually works (in the workflow, not the
-form — GHL cannot tag per dropdown option), the follow-up steps once it exists, and a
-ready-to-send prompt for the Claude browser extension.
+**One step remains:** paste embed `ys8URRJqtAmloGrhk5lo` into `site/index.html` above the final
+CTA (~line 586) with a `min-height`, and push. Until then the live page still has no form, so
+the gap is closed in GHL and open on the web.
+
+**Still true and still the reason any of this matters:** without the form, every segment gets
+the homeowner nurture, and a landlord with twelve roofs receives an email about one ceiling
+stain. Details in `ghl-form.md`, including why tagging lives in the workflow rather than the
+form — GHL cannot tag per dropdown option.
 
 ---
 
 ## Session logs
 
+- [`sessions/2026-08-11.md`](sessions/2026-08-11.md) — Part 5. Four workflows built, the form and
+  its field migration, and the five written specs that met the live GHL UI and lost — every one
+  a silent failure.
 - [`sessions/2026-08-08.md`](sessions/2026-08-08.md) — Parts 3 and 4. The carousel render-path
   decision, every diagram fix, the placement correction, the Vercel and GitHub wiring, the
   masthead failure and what it taught, and how the missing form was found.
