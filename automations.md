@@ -91,6 +91,27 @@ call later. Pwede ka rin pumili ng oras dito:
 https://api.leadconnectorhq.com/widget/booking/OzxJlo2ymaCQIpZC8sUi
 ```
 
+**A1-EMAIL-instant — immediate, plain text.** Added 11 Aug. This is what carries the
+60-second promise now that SMS cannot send. First step in the workflow, before everything.
+Subject: `Got your roof check request`
+
+```
+Hi {{contact.first_name}},
+
+Rommel here from Trueline Roof Care. Your request for a free roof check came through and I'm
+calling you in about five minutes.
+
+If you're busy, reply to this email and I'll call later, or pick a time that suits you:
+https://api.leadconnectorhq.com/widget/booking/OzxJlo2ymaCQIpZC8sUi
+
+What you get either way: I look at the roof, and you get the findings in writing, itemized,
+within 24 hours. If it needs a repair, the quotation says repair. If it needs nothing, it
+says that too, and that happens more often than you'd expect.
+
+Rommel Bautista
+Trueline Roof Care · Santa Rosa, Laguna
+```
+
 **A1-SMS-2 — day 4, still no booking** (~250 chars)
 
 ```
@@ -593,28 +614,40 @@ is worse than no filter, because the doc says you're covered.
 
 ---
 
-## A1 · Speed-to-Lead — after the form exists
+## A1 · Speed-to-Lead — unblocked, build last
 
-**Blocked.** Two things come from `ghl-form.md` being built first:
+**No longer blocked.** The form exists (`Trueline — Roof Check Request`, embed ID
+`ys8URRJqtAmloGrhk5lo`) and the segmentation field was rebuilt as single-select on 11 Aug.
 
-- the `Form Submitted` trigger has no form to point at
-- the segment branch has no custom field key to read
+**The field key is `contact.what_do_you_need_v2`** — not `contact.what_do_you_need`, which
+still belongs to the old multi-select field pending deletion. Using the old key silently
+branches on a field the form no longer writes to.
 
-Current state: trigger `Contact Created` (no filters) → Wait 24h → If/Else has-no-appointment →
-Send Email, with email 2 not yet pasted. That's a stand-in, and it gets **replaced**, not
-extended.
+> ⚠ **The four option values are auto-generated from the sentence labels and are long.** They
+> are recorded in `ghl-form.md` once read back. Select them from GHL's picker in the If/Else —
+> do not hand-type them. If the If/Else demands typed values rather than offering a picker,
+> stop and say so before typing a 40-character string four times.
+
+**Edit A1 in place. Do not delete and rebuild it.** Email 2's HTML is already pasted inside the
+existing workflow and verified intact; rebuilding from scratch throws it away and it has to be
+re-pasted through the code editor without reformatting. The trigger swap is two clicks and the
+branch inserts above the existing wait.
+
+Current state: trigger `Contact Created` (no filter, deliberately) → Wait 24h → If/Else
+has-no-appointment → Send Email 2.
 
 ```
 Form Submitted  ◄── replaces Contact Created; delete the old trigger, don't keep both
-  ├─ A1-SMS-1                    (immediate — this is the 60-second promise)
+  ├─ A1-EMAIL-instant            (immediate — this is what carries the 60-second promise now)
+  ├─ A1-SMS-1                    (builds, cannot send — no number, A2P unstarted)
   ├─ Create Task: "Call {{contact.first_name}} — roof check" due in 5 min, assigned Rommel
   ├─ Move opportunity → New Lead
   │
-  ├─ If/Else on custom field "What do you need?"
-  │    ├─ = repair      → add tag repair       → no extra touch
-  │    ├─ = care-plan   → add tag care-plan    → no extra touch
-  │    ├─ = multi-unit  → add tag multi-unit   → A1-EMAIL-multiunit
-  │    └─ = new-build   → add tag new-build    → A1-EMAIL-newbuild
+  ├─ If/Else on custom field contact.what_do_you_need_v2
+  │    ├─ = leak/damage option    → add tag repair      → no extra touch
+  │    ├─ = no-leak-yet option    → add tag care-plan   → no extra touch
+  │    ├─ = apartment option      → add tag multi-unit  → A1-EMAIL-multiunit
+  │    └─ = building-new option   → add tag new-build   → A1-EMAIL-newbuild
   │
   └─ Wait 24h
        └─ If/Else: has no appointment?
@@ -635,12 +668,14 @@ new-build branches get one because the standard nurture is wrong for them — a 
 twelve roofs reading about one ceiling stain is the exact failure `ghl-form.md` was written to
 prevent.
 
-**Timings are cumulative:** SMS 1 at 0s, nurture email at 24h, SMS 2 at day 4, Lost at day 5.
+**Timings are cumulative:** instant email at 0s, nurture email at 24h, SMS 2 at day 4, Lost at
+day 5.
 
-**Two-phase option if you want to build before the form exists:** everything except the trigger
-and the four-way branch works today on the `Contact Created` stand-in. But you'd be rebuilding
-the trigger and inserting the branch later, which is exactly the rework the resume note in
-`PROGRESS.md` says to avoid. Build the form first.
+**Why the instant reply is an email and the design still holds.** The 60-second promise was
+always about *speed*, not about the channel — and the Part 5 brief specifies email as the
+primary instant-reply path, with SMS as the addition when a number exists. The SMS step stays
+on the canvas because it is the designed system and because it will work the day A2P
+registration clears.
 
 ### Prompt for the extension — A1
 
@@ -657,23 +692,35 @@ the trigger and inserting the branch later, which is exactly the rework the resu
 >
 > **Then, in order:**
 >
-> 1. **Send SMS** — body below, labelled A1-SMS-1. No wait before this; it's the first step.
+> 1. **Send Email** — subject `Got your roof check request`, plain text, body below labelled
+>    A1-EMAIL-instant. No wait before this; it is the first step and it carries the
+>    60-second promise.
+> 1b. **Send SMS** — body below, labelled A1-SMS-1. **Add it even though it cannot send** —
+>    no number is provisioned and A2P registration is unstarted. It is part of the designed
+>    system. If GHL refuses to save an SMS step, skip it and say so.
 > 2. **Create Task** — title `Call {{contact.first_name}} — roof check`, due in 5 minutes,
 >    assigned to Rommel
 > 3. **Update Opportunity** — pipeline `Trueline Roof Leads`, stage `New Lead`
 > 4. **If/Else, four branches**, reading the custom field `What do you need?`
->    (internal key: `contact.what_do_you_need`)
+>    (internal key: **`contact.what_do_you_need_v2`** — NOT `contact.what_do_you_need`, which
+>    is the old multi-select field pending deletion)
 >
->    **The values are not what you would guess — use these exactly**, read live from GHL on
->    10 Aug. Note `careplan` and `multiunit` have no hyphen and `new_build` uses an
->    underscore. The **tags** keep their hyphens; only the conditions use these strings:
+>    **Select each option from GHL's picker — do not hand-type the values.** The v2 field's
+>    values are auto-generated from the sentence labels and are long. Match on the option
+>    whose **label** is quoted below; the value is whatever GHL shows against it. If the
+>    If/Else offers no picker and demands typed values, stop and tell me rather than
+>    transcribing four long strings by hand.
 >
->    - value `repair` → Add Tag `repair`
->    - value `careplan` → Add Tag `care-plan`
->    - value `multiunit` → Add Tag `multi-unit`, then Send Email, subject
->      `Twelve roofs, one schedule, one report`, plain text
->    - value `new_build` → Add Tag `new-build`, then Send Email, subject
->      `Send us the plans and we'll start the takeoff`, plain text
+>    - label `My house has a leak or damage` → Add Tag `repair`
+>    - label `No leak yet, I want my house checked before the rains` → Add Tag `care-plan`
+>    - label `I have an apartment, several units, or more than one house` → Add Tag
+>      `multi-unit`, then Send Email, subject `Twelve roofs, one schedule, one report`,
+>      plain text
+>    - label `I'm building new and have plans` → Add Tag `new-build`, then Send Email,
+>      subject `Send us the plans and we'll start the takeoff`, plain text
+>
+>    **The tags keep their hyphens.** They are ours and they are referenced in `brief.md`;
+>    only the conditions depend on GHL's generated values.
 >
 >    All four branches then continue into step 5.
 > 5. **Wait** 24 hours
