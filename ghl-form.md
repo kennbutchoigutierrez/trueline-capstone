@@ -119,6 +119,29 @@ duplicate-name problem this file already dodged once:
 **It costs nothing right now and never will be cheaper.** No submissions exist, the form is
 not embedded on the site, and A1 does not reference the field yet.
 
+### Done 11 Aug — and three things the migration taught
+
+**The replacement exists:** `contact.what_do_you_need_v2`, type `Dropdown (single)`, object
+Contact, folder `Form | trueline roof`, four sentence labels. Swapped into the form at
+position 5 and confirmed persisted across a builder reload. **The old field still exists** and
+still holds `contact.what_do_you_need`.
+
+**Renaming a field does not free its key.** Creating the replacement failed with *"A custom
+field already uses this name. Please choose a different name."* even after the old field's
+label had been renamed — GHL collided on the auto-generated key, which the rename never
+touched. The key had to be set manually. So the old field must be **deleted**, not renamed,
+before anyone assumes `contact.what_do_you_need` is reusable.
+
+**⚠ GHL warns you about nothing.** Renaming the field produced no warning. Removing it from
+the form canvas produced no warning, no confirmation dialog, and no notice that the field was
+referenced anywhere else. Nothing in the platform protects a workflow from having its branch
+condition silently orphaned. This is the whole argument for reading the live screen instead of
+trusting that a destructive action would have stopped you.
+
+**Form builder quirk:** fields cannot be reordered by dragging within the canvas. A new field
+lands at the end; to place it, drag it from the *Add Object Fields* side panel directly onto
+the target position on the canvas.
+
 **Option not taken: keep multi-select and branch with `contains`**, ordered most-specific-first
 so a landlord who ticks two options lands in `multiunit`. Rejected because it depends on GHL
 offering a `contains` operator on a multi-select in If/Else — and this build has now assumed an
