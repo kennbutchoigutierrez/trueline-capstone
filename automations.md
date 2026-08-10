@@ -787,6 +787,85 @@ registration clears.
 
 ---
 
+## The test pass — one contact, all four workflows
+
+Everything built so far has never run. Three canvases and a rescue branch that have never
+fired are not a working system, and the Part 5 brief is explicit that an automation which
+"fires on nothing does not showcase well." This pass turns them into something you can
+honestly say works, and it closes every open verification item in one sitting.
+
+### Publishing is safe now — and it wasn't before
+
+A1's trigger is `Form Submitted`, not `Contact Created`. The whole reason for the
+never-publish rule was that an unfiltered `Contact Created` would fire on a re-import of the
+15 seeded leads. **That risk disappeared with the trigger swap** — a CSV import doesn't submit
+a form. A2 and A2b are filtered to one calendar, and A3 to one pipeline stage.
+
+So publish for the test, then unpublish or leave them live as you prefer. What still matters is
+deleting the test contact afterward, because the pipeline board gets filmed.
+
+### Shorten these waits first, and write down what you changed
+
+| Workflow | Wait | Real value | Set to for test |
+|---|---|---|---|
+| A1 | after the branch | 24 hours | 2 minutes |
+| A1 | after nurture email | 3 days | 2 minutes |
+| A1 | before Lost | 1 day | 2 minutes |
+| A2 | before 24h reminder | 24h before appointment | leave — appointment-relative |
+| A2 | before 1h reminder | 1h before appointment | leave — appointment-relative |
+| A2b | before no-show SMS | 15 minutes | 1 minute |
+| A2b | before no-show email | 1 day | 2 minutes |
+| A3 | day 3 | 3 days | 2 minutes |
+| A3 | day 7 | 4 days | 2 minutes |
+| A3 | day 14 | 7 days | 2 minutes |
+
+**Every one of these goes back before filming.** A shortened wait is correct practice and the
+standard way a workflow ships broken — the 9 Aug audit found A1's at 1 minute and nearly
+recorded it as a defect.
+
+### The run
+
+**Use a real email address you can open.** The point is seeing the HTML land in an inbox, not
+in GHL's preview.
+
+1. **Submit the form yourself** — the real one, not a test button. Pick the *apartment or
+   several units* option, because it's the branch that proves the routing brain: it should tag
+   `multi-unit` and send the portfolio email, not the six-signs nurture.
+2. **Confirm A1 fired:** instant email arrives, task appears for Rommel due in 5 minutes,
+   opportunity created at `New Lead`, tag `multi-unit` applied, portfolio email arrives.
+3. **Wait out the shortened waits** — the nurture email should arrive, then the day-4 step,
+   then the opportunity flips to `Lost` with `nurture-may`.
+4. **Book a call** as that same contact through the booking widget. A2 fires: stage moves to
+   `Call Booked`, the HTML confirmation lands, then the 24h reminder email.
+5. **Mark the appointment No Show.** A2b fires: the rescue email lands, stage returns to
+   `Contacted`.
+6. **Move the opportunity to `Quote Sent`.** A3 fires through all three emails, then `Lost`
+   plus `nurture-may`.
+7. **Delete the test contact and its opportunity.** Then restore every wait from the table.
+
+### What this settles — the open list
+
+- [ ] A1's four-way If/Else offered a picker, and the four literal stored values
+- [ ] `Contact Created` is gone from A1
+- [ ] Email 2's HTML survived — wordmark as text, copper button, not blue
+- [ ] A1's existing Wait reads 24 hours and the email is on the condition-met branch
+- [ ] A2's two waits saved as appointment-relative rather than fixed delays
+- [ ] Which appointment-time merge token GHL produced, and that it resolves rather than
+      shipping raw `{{...}}`
+- [ ] `{{contact.first_name}}` fills in on every email
+- [ ] Whether the SMS steps saved with no number attached
+- [ ] A2's trigger carries the calendar filter
+- [ ] A3's two If/Else conditions kept their pipeline-stage filter
+- [ ] A3's `Update Opportunity` set **status** independently of stage
+- [ ] GHL is not appending a second unsubscribe under the one in the footer
+
+### Screenshots to grab while it's running
+
+The board mid-flight, the task in Rommel's queue, both HTML emails in a real inbox, and each
+canvas. These are the shots the videos need and this is the only moment they exist.
+
+---
+
 ## After all three are built
 
 - [ ] Test A3 with one contact: create it, drag to `Quote Sent`, confirm the day-3 email queues
