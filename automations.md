@@ -476,6 +476,19 @@ If the tag isn't selectable because it doesn't exist yet, create it in **Setting
 and the never-publish rule is the real protection. This was belt-and-braces on a draft with
 a few days to live. Don't spend build time here.
 
+### ✅ Settled 10 Aug: A1 stays unfiltered
+
+**Kenn's call, and it's the right one.** A1's `Contact Created` trigger runs with no filter
+until the form ships, at which point the whole trigger is deleted.
+
+**This is deliberate, not an oversight.** Anyone opening A1 and finding a bare trigger should
+read this line and move on rather than "fixing" it.
+
+**The one thing it depends on: A1 must not be published.** With no filter, publishing it
+against the 15 seeded leads fires the nurture at every one of them and burns the demo board.
+That is now the *only* thing standing between the draft and a mess, so it graduates from a
+general rule to a hard precondition on this specific workflow.
+
 **The lesson worth keeping:** the 9 Aug decision was recorded as "decided" without anyone
 opening the operator dropdown. A filter that reads well in a doc and doesn't exist in the UI
 is worse than no filter, because the doc says you're covered.
