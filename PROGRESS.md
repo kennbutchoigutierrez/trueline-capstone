@@ -1,7 +1,10 @@
 # PROGRESS.md — Trueline Roof Care capstone
 
-**Last worked:** 8 August 2026
-**Remaining:** the 3 GHL automations → Raven Day 5 walkthrough → Loom capability pitch
+**Last worked:** 9 August 2026 — A1 audited and fixed, interim trigger filter decided
+**Remaining:** the form → the 3 GHL automations → Raven Day 5 walkthrough → Loom capability pitch
+
+**Next action:** send the form prompt in `ghl-form.md` to the extension. While it's in flight,
+build **A3** — it's unblocked and fully specced.
 
 ---
 
@@ -40,6 +43,14 @@ draft 1 at ad level three times and swap creative and copy. **Everything paste-r
 me the embed code and the custom field key and the form goes into `site/index.html`. Doing
 it before the automations means A1 gets its real trigger and its segment branching in one
 pass instead of being rebuilt later.
+
+**The prompt now leads with a check, not a create.** The 9 Aug audit found `What do you need?`
+already in the sub-account, so the prompt tells the extension to reuse it and report its key
+and stored values. Creating a duplicate would have the form writing to one field and A1's
+branch reading the other — a branch that silently matches nothing.
+
+**A3 is not blocked by any of this.** Build it in the same sitting; the form round-trip is
+the long pole.
 
 ## 3 · The three automations — the last real build
 

@@ -35,6 +35,12 @@ Phone is required because A1 opens with SMS inside 60 seconds. No phone, no spee
 **Custom field — `What do you need?`**, single select. The sentence is the visitor-facing
 **label**; the short string is the stored **value**.
 
+> ⚠ **This field already exists in the sub-account.** The 9 Aug A1 audit found it in the
+> `Contact Created` trigger's filter list. **Reuse it — do not create a second one.** Two
+> fields with the same name is the worst outcome here: the form would write to one and A1's
+> branch would read the other, and the branch would silently match nothing. What still needs
+> reading is its internal key and whether its four stored values match the table below.
+
 | Label | Value |
 |---|---|
 | My house has a leak or damage | `repair` |
@@ -102,9 +108,18 @@ Form Submitted
 > | What do you need? | dropdown / single select (custom field) | yes |
 > | Anything we should know? | multi-line text | no |
 >
-> **The dropdown needs a custom field.** Name it `What do you need?`, type single-select
-> dropdown, with exactly these four options. The sentence is the **label** the visitor
-> sees; the short string is the stored **value**:
+> **The dropdown uses a custom field that most likely already exists.** Before creating
+> anything, go to **Settings → Custom Fields** and look for a contact field named
+> `What do you need?`. It was seen in this sub-account on 9 August.
+>
+> - **If it exists:** use it. Do not create a second field with this name — the form would
+>   write to one and my workflow would read the other. Tell me its internal key and its
+>   exact stored option values, and if those values differ from the table below, tell me
+>   what they actually are rather than editing them.
+> - **If it genuinely doesn't exist:** create it. Name `What do you need?`, type
+>   single-select dropdown, with exactly these four options.
+>
+> The sentence is the **label** the visitor sees; the short string is the stored **value**:
 >
 > | Label | Value |
 > |---|---|
@@ -126,9 +141,10 @@ Form Submitted
 > Just create and save the form.
 >
 > **Then tell me:**
-> 1. The form's **embed code** (the full iframe or script snippet), pasted exactly
-> 2. The custom field's **internal key/ID** for `What do you need?` — I need it for
+> 1. Whether `What do you need?` already existed or you created it
+> 2. The form's **embed code** (the full iframe or script snippet), pasted exactly
+> 3. The custom field's **internal key/ID** for `What do you need?` — I need it for
 >    workflow branching
-> 3. Whether the four dropdown values saved as `repair`, `care-plan`, `multi-unit`,
->    `new-build` exactly, or whether GHL rewrote them
-> 4. Any error, exactly as shown
+> 4. Its four stored values, exactly as they read in GHL — whether they are `repair`,
+>    `care-plan`, `multi-unit`, `new-build` or something else
+> 5. Any error, exactly as shown
