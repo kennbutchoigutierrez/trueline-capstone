@@ -3,9 +3,11 @@
 **Last worked:** 11 August 2026 — form built, field migrated, A2 + A2b + A3 built, A1 in progress
 **Remaining:** finish A1 → test pass → form onto the landing page → Loom pitch → Raven walkthrough
 
-**Next action:** finish A1 (extension is mid-build on workflow `96922823`), then run the
-**test pass** in `automations.md` — one contact through all four workflows. That single run
-closes twelve open verification items and produces every screenshot the videos need.
+**Next action:** ⚠ **open A1 and audit what actually got built** — the extension was stopped
+mid-build and never reported, so its state is unknown. See §1b for the check order; the trigger
+is the one that matters. Then finish A1, then run the **test pass** in `automations.md` — one
+contact through all four workflows, closing twelve verification items and producing every
+screenshot the videos need.
 
 ---
 
@@ -46,15 +48,37 @@ the titles would have damaged the wrong one. Renamed, but the habit stands.
   converted. Live field is **`contact.what_do_you_need_v2`**, single-select. The old
   `contact.what_do_you_need` is deleted.
 
-## 1b · In flight with the Claude browser extension — 11 Aug
+## 1b · ⚠ A1 IS IN AN UNKNOWN STATE — verify before building anything
 
-**Task:** build A1 on workflow `96922823-9be4-47e2-bae4-0faffb31a570`. Field checks and the
-form swap are confirmed done; the old custom field is deleted; A1 and A2 have been renamed to
-match their contents.
+**The extension was stopped mid-build on 11 Aug**, part-way through A1 on workflow
+`96922823-9be4-47e2-bae4-0faffb31a570`. It never reported back, so **nothing about A1 is
+confirmed.** Do not assume any step landed, and do not assume none did.
 
-**Awaiting from it:** the four literal stored values from the If/Else picker (clipped from three
-reports running — ask for plain unformatted lines), the A2b and A3 workflow ids, confirmation
-`Contact Created` is gone, and that the existing HTML email step went untouched.
+**Open A1 and read the canvas before touching it.** Check, in this order:
+
+1. **The trigger — this is the dangerous one.** The build swaps `Contact Created` for
+   `Form Submitted`. A stop mid-swap can leave **both** (A1 fires twice per form lead) or
+   **neither** (A1 cannot fire at all). Exactly one trigger should remain, and it should be
+   `Form Submitted` filtered to `Trueline — Roof Check Request`.
+2. **Email 2's HTML step** — it must still be there and untouched. Header wordmark as live
+   text, copper button, not blue. This is the step the whole "edit in place, never rebuild"
+   rule exists to protect.
+3. **The existing Wait** — should read 24 hours, and the existing If/Else should have the Send
+   Email on the condition-**met** branch with `END` on the else. Both were correct on 9 Aug.
+4. **Which new steps exist** — instant email, SMS 1, the 5-minute task, the opportunity move,
+   the four-way branch, and the tail from Wait 3 days onward. Build only what's missing.
+5. **Duplicates** — a partial re-run can leave two of the same step. Cheaper to spot now than
+   to debug from a double-sent email during the test.
+
+**Confirmed done before the stop**, so these don't need redoing: the old custom field is
+deleted, the form swap to `contact.what_do_you_need_v2` is verified, and A1 and A2 were renamed
+so their titles match their contents.
+
+**Still never obtained:** the four literal stored values from the If/Else picker (clipped from
+three reports in a row — ask for plain unformatted lines), and the A2b and A3 workflow ids.
+
+**A1 is in Draft, so nothing is running and no waits are ticking.** There is no urgency and no
+damage in progress — only an unverified canvas.
 
 **The prompt pattern that works** — established across five tasks today, and worth reusing:
 
