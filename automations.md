@@ -741,7 +741,11 @@ in my instructions:
 Leave the workflow in Draft. Do not publish it.
 ```
 
-**Paste 2 — the go-ahead sent after it read the file back**
+**Paste 2 — the go-ahead sent after it read the file back. THIS WAS THE LAST PROMPT SENT.**
+
+Which matters for the audit: the extension was past the readback and actively building when it
+was stopped. **Assume steps landed.** The trigger swap was the first instruction in that paste,
+so the trigger is the most likely thing to be half-applied — and the least visible.
 
 ```
 Confirmed, proceed now. Trigger reads Contact Created and the id matches, so you
