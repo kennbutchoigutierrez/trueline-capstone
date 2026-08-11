@@ -71,8 +71,10 @@ The dangerous case was a half-saved branch 1 that a rebuild would have silently 
   `my_house_has_a_leak_or_damage` and so on — not the long opaque strings three sessions of
   notes warned about. The one trap is the dropped apostrophe: `im_building_new_and_have_plans`.
 - **GHL branches cannot converge by drag.** Three branches reach the shared Wait through the
-  **`Go to` internal action**. It's a jump, not a wire, so the canvas *looks* like three
-  dead-ending branches. The test pass has to prove that path carries.
+  **`Go to` internal action**. The canvas *does* draw the jump, as dashed edges — confirmed in
+  the screenshots — so nothing looks like a dead end on camera. The test pass still has to prove
+  the jump executes. **Rename the three `Go to` steps before filming**; they all read `Go to`,
+  so the canvas can't say what they target.
 - **The three carried-over unknowns are clean:** Wait reads 24 hours, the 9 Aug branch
   inversion is still fixed, and email 2's HTML survived — wordmark as text, copper button.
   Read via side-panel preview only, so the screenshots are the second look.

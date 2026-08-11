@@ -674,14 +674,37 @@ shared downstream node by dragging connectors. The four-way branch had to reach 
 Wait via the **`Go to` internal action** on three of the four branches; `repair` flows in
 directly because it inherited the original connection when the If/Else was inserted above it.
 
-**Why it matters beyond A1:** `Go to` is a jump, not a wire. Nothing on the canvas visually
-connects those three branches to the Wait, so anyone reading the canvas — including on camera —
-sees three branches that appear to dead-end. **The test pass must prove a multi-unit contact
-actually reaches the 24h nurture**, because that is precisely the kind of failure this platform
-produces silently. It is now a verification item below.
+**GHL does draw the jump — corrected from the screenshots.** The first note here said the canvas
+shows nothing connecting those branches to the Wait. It does: `Go to` edges render as **dashed**
+curves, and all three are visible arcing back into the Wait. Nothing looks like a dead end on
+camera. What still needs proving is that the jump *executes*, which only the test pass settles.
+
+**Name the `Go to` steps.** All three carry GHL's default label, so the canvas cannot tell you
+what any of them targets without opening it — and that jump is the one part of A1 that isn't
+self-evident from the shape. Same for the four `Add Tag` steps and the three `Wait`s. The emails
+and SMS all carry proper names (`A1-EMAIL-multiunit`, `A1-SMS-2`), which is why the defaults
+stand out. Rename before filming: `Go to → 24h Wait`, `Wait 24h`, `Wait 3 days`, `Wait 1 day`.
 
 The alternative was duplicating the Wait and everything under it four times, which would have
 meant four copies of the HTML email step. `Go to` is the right call.
+
+### Confirmed from the canvas screenshots, 11 Aug
+
+Four screenshots read top to bottom. **The canvas matches this build sheet end to end.**
+
+| Checked | Result |
+|---|---|
+| Triggers | **One only** — `Form Submitted`, `Form is any of "Trueline — Roof …"`. `Contact Created` is gone |
+| Steps 1–4 | `A1-EMAIL-instant` → `A1-SMS-1` → `#1 Add task` → `Update opportunity`. No duplicates anywhere |
+| The four-way | Branches labelled `repair` · `care-plan` · `multi-unit` · `new-build`, each with its Add Tag; `multi-unit` and `new-build` carry their email. `None` → `END` |
+| The `Go to` jumps | Rendered as dashed edges, all three arcing back into the Wait |
+| The tail | Wait → Condition → Email → Wait → Condition → `A1-SMS-2` → Wait → Update opportunity → Add Tag → `END`, every `None` ending |
+| State | `Draft`, `Saved` |
+
+**⚠ The four-way `None` branch ends the workflow.** A contact with no value in
+`what_do_you_need_v2` gets nothing — not even the nurture. That is only safe because the
+dropdown is **required** on the form. If it is ever made optional, or a contact is enrolled by
+some route that bypasses the form, this is a silent drop.
 
 ### Verified in the same pass — the three carried-over unknowns, all clean
 
