@@ -764,7 +764,9 @@ Two additions to your report when you're done:
     formatting:  label = value
 ```
 
-**Paste 3 — the resume variant. Send THIS next, not paste 1.**
+**Paste 3 — the read-only resume variant.** Superseded by paste 4 below. Send this one only if
+you want an independent re-read of the canvas instead of trusting the report in `PROGRESS.md`
+§1b — it costs a full extra round trip and re-establishes what is already known.
 
 ```
 I'm in GoHighLevel. A previous session was building the workflow
@@ -789,6 +791,118 @@ exactly as it stands, top to bottom:
 Report all six, then stop. I will tell you what to build after I see it.
 
 Leave the workflow in Draft. Do not publish it. Do not delete or add anything.
+```
+
+**Paste 4 — the A1 resume paste. SEND THIS ONE.** Written 11 Aug after the stop.
+
+**Why it is built the way it is.** The steps are written *inline* rather than as "read the file
+and follow it," and the raw file is used only for the four message bodies. That is deliberate:
+the extension refuses to execute instructions it finds on the web without a go-ahead, so a
+file-pointer paste always costs a readback round trip. Instructions in the paste, data in the
+file, and it can start on the first message. It also states every pre-authorisation up front and
+narrows the stop conditions to three, so it does not halt on the SMS steps, the Peter Gutierrez
+assignment, or anything else already settled.
+
+```
+I'm in GoHighLevel, in Automation, in the workflow "A1 — Speed-to-Lead",
+id 96922823-9be4-47e2-bae4-0faffb31a570. A previous session built it up to step 4
+and was stopped mid-edit inside the four-way If/Else. I know exactly what landed,
+so do not re-audit the canvas and do not rebuild anything that already exists.
+
+WORK AS EFFICIENTLY AS POSSIBLE. Everything below is pre-authorised. Do not stop
+to confirm, do not ask permission between steps, do not narrate each click, and
+do not read this back to me before acting — I am telling you now, in advance,
+that all of it is intended. There are exactly three stop conditions and they are
+listed at the end. Anything else: keep building, note it, report it at the end.
+
+ALREADY DONE — do not touch, do not re-add, do not verify:
+  - Trigger: Form Submitted, filtered to the form "Trueline — Roof Check Request".
+    Contact Created is already deleted. The trigger is correct and finished.
+  - Step 1  Send Email  "A1-EMAIL-instant", subject "Got your roof check request"
+  - Step 2  Send SMS    "A1-SMS-1"
+  - Step 3  Add Task
+  - Step 4  Update Opportunity → pipeline "Trueline Roof Leads", stage "New Lead"
+  Re-adding any of these creates duplicates. Leave them alone.
+
+FIRST: reload the page. The branch editor was left with a collapsed Branch row
+and an unresponsive expand chevron. Nothing was saved or cancelled, so nothing is
+corrupted — the reload clears it.
+
+Then do all of the following in one pass.
+
+A. The four-way If/Else (step 5), reading the custom field "What do you need?",
+   internal key contact.what_do_you_need_v2 — NOT contact.what_do_you_need, which
+   is deleted. If you somehow see two, you have the wrong one.
+
+   Branch 1 may already carry the value "My house has a leak or damage" from the
+   interrupted session. Check that one branch only. If it is there, keep it and
+   build the other three. If it is not, build all four.
+
+   Select every value from GHL's option picker. It does offer one — that is
+   already confirmed. Never hand-type these values; they are long auto-generated
+   strings. Match on the LABEL quoted here:
+
+   label "My house has a leak or damage"
+       → Add Tag  repair
+   label "No leak yet, I want my house checked before the rains"
+       → Add Tag  care-plan
+   label "I have an apartment, several units, or more than one house"
+       → Add Tag  multi-unit  → Send Email, plain text,
+         subject "Twelve roofs, one schedule, one report"
+   label "I'm building new and have plans"
+       → Add Tag  new-build   → Send Email, plain text,
+         subject "Send us the plans and we'll start the takeoff"
+
+   The tags keep their hyphens exactly as written above. All four branches then
+   feed into the EXISTING Wait. Do not create a new Wait.
+
+B. Steps 6, 7 and 8 already exist. Read them, change nothing, and answer three
+   questions in your report:
+   - Does the Wait read 24 hours?
+   - On the If/Else "Last appointment is empty", is the Send Email on the
+     condition-MET branch and END on the else branch?
+   - Does the Send Email "Six signs it's a repair, not a re-roof" still exist,
+     with the wordmark as live text and a copper button, not blue?
+   Do NOT open that email in an editor that could reformat it. Look and close.
+
+C. Then build steps 9 to 14 straight through, no confirmation between them:
+   9.  Wait 3 days
+   10. If/Else — has no appointment? If they have one → END. Otherwise continue.
+   11. Send SMS  "A1-SMS-2"
+   12. Wait 1 day
+   13. Update Opportunity → status Lost
+   14. Add Tag  nurture-may
+
+D. Workflow settings: allow re-entry OFF, stop on reply ON.
+
+E. Leave the workflow in DRAFT. Do not publish it.
+
+The two SMS bodies and the two branch email bodies are in this file under the
+heading "A1 messages". Read it ONCE, take all four, use them exactly as written:
+https://raw.githubusercontent.com/kennbutchoigutierrez/trueline-capstone/main/automations.md
+
+PRE-AUTHORISED — do not stop for any of these, they are all intended:
+  - Add both Send SMS steps even though this sub-account has no phone number and
+    no A2P registration. They cannot send. A1-SMS-1 already saved with no error.
+  - The existing task is assigned to Peter Gutierrez, not Rommel. No Rommel user
+    exists on this account. Correct as is.
+  - The task due date reads 0 Days + 1:01 PM. GHL has no minutes option. Correct
+    as is.
+
+STOP AND ASK ONLY IF:
+  1. The If/Else offers no picker and demands typed values.
+  2. GHL refuses to save a step, or shows an error.
+  3. Something listed under ALREADY DONE is missing, or appears twice.
+
+REPORT WHEN FINISHED — this list, nothing else:
+  1. The four stored VALUES from the picker, as four plain lines, no bullets and
+     no code block:   label = value
+     This has been clipped from three reports in a row. Do not summarise it.
+  2. Was branch 1 already there after the reload, or did you build it?
+  3. The three answers from section B.
+  4. Whether both SMS steps saved.
+  5. The workflow ids of "A2b — No-Show Rescue" and "A3 — Quote Follow-Up".
+  6. Any error, quoted exactly as shown.
 ```
 
 ### Prompt for the extension — A1

@@ -3,9 +3,10 @@
 **Last worked:** 11 August 2026 — form built, field migrated, A2 + A2b + A3 built, A1 in progress
 **Remaining:** finish A1 → test pass → form onto the landing page → Loom pitch → Raven walkthrough
 
-**Next action:** finish A1's four-way branch — steps 1–4 are saved and the trigger swap is
-clean; the branch panel was left mid-edit with a stuck chevron. **Reload the page first**, then
-re-read branch 1 and build the other three. Full state in §1b. Then the **test pass** in
+**Next action:** send **paste 4** in `automations.md` → "The pastes used on 11 Aug". It resumes
+A1 from the four-way branch and runs to the end of the workflow in a single message — steps 1–4
+are saved and the trigger swap is clean, so it skips them; the branch panel was left mid-edit
+with a stuck chevron, so it reloads first. Full state in §1b. Then the **test pass** in
 `automations.md` — one contact through all four workflows, closing twelve verification items and
 producing every screenshot the videos need.
 
