@@ -1091,6 +1091,56 @@ fired are not a working system, and the Part 5 brief is explicit that an automat
 "fires on nothing does not showcase well." This pass turns them into something you can
 honestly say works, and it closes every open verification item in one sitting.
 
+### ✅ Decided 11 Aug — run the short version, not the full pass
+
+**This is a capability pitch, not a production handover.** The full pass below is kept intact
+and is still the right thing if this system ever goes live for a real client. For the video, it
+is the wrong trade: it shortens ten waits across four workflows and every one has to go back,
+which is precisely how a workflow ships broken. The 9 Aug audit found A1's wait sitting at 1
+minute and nearly recorded it as a defect.
+
+**What the short version buys, in about fifteen minutes:** both HTML emails rendered in a real
+inbox, a card moving across the board on its own, a task in the queue, and proof that the `Go
+to` jump executes — the one unverified thing left in A1. **One wait gets shortened, not ten.**
+
+#### ⚠ Order matters, and it is not obvious
+
+Booking kills the nurture. A1's condition reads `Last appointment at is empty`, so the moment
+the test contact books, the six-signs email routes to `END` and never lands in the inbox.
+**Submit and let the nurture arrive first, then book.** Or use two test contacts. Getting this
+backwards costs you the single best shot in the pitch and looks like a broken workflow.
+
+#### The run
+
+1. **Rename first** — the three `Go to` steps and the three `Wait`s, per the naming note in
+   A1's built section. The mid-flight screenshots only exist once; do the polish before them.
+2. **Publish A1 and A2.** Safe now — see the section below.
+3. **Shorten one wait:** A1's 24h, after the four-way branch → **2 minutes**. Write it down.
+   Nothing else changes.
+4. **Submit the form yourself**, real email you can open, picking **the apartment / several
+   units option** — the branch that proves the routing brain.
+5. **Confirm A1's front half:** instant email arrives · task appears · opportunity at
+   `New Lead` · tag `multi-unit` applied · portfolio email arrives.
+6. **Wait the 2 minutes.** The six-signs nurture lands. **This is the `Go to` proof** — a
+   multi-unit contact reaching a step that lives in the `repair` column.
+7. **Now book** through the widget. A2 fires: stage → `Call Booked`, HTML confirmation lands.
+8. **Screenshots while it is mid-flight** — the board, the task, both emails in the inbox.
+9. **Restore the 24h wait. Delete the test contact and its opportunity.** Unpublish or leave
+   live, your call.
+
+#### Deliberately unrun — say so rather than imply otherwise
+
+A1's day-4 SMS and `Lost` close · A2's two appointment reminders · **A2b entirely** · **A3
+entirely**. The SMS steps could not have run regardless; no number, no A2P.
+
+**The honest sentence for camera:** *"Built and smoke-tested end to end on the front half — the
+multi-day tails are on the canvas."* True, and strong enough. What you cannot say is that the
+whole system is proven, and nobody expects a five-day sequence to have run.
+
+**What stays open as a result:** every item in the verification list below except the ones
+already ticked — A2's wait types and merge tokens, A3's stage filters and status update, the
+unsubscribe question. They are recorded as unverified, not as done.
+
 ### Publishing is safe now — and it wasn't before
 
 A1's trigger is `Form Submitted`, not `Contact Created`. The whole reason for the
@@ -1100,6 +1150,14 @@ a form. A2 and A2b are filtered to one calendar, and A3 to one pipeline stage.
 
 So publish for the test, then unpublish or leave them live as you prefer. What still matters is
 deleting the test contact afterward, because the pipeline board gets filmed.
+
+---
+
+### The full pass — kept, superseded for the pitch
+
+Everything from here down describes the complete run. **Not being done for the video** (see the
+decision above), and kept because it is the right procedure the day this system runs for a real
+client, and because the verification list is where the open items live.
 
 ### Shorten these waits first, and write down what you changed
 

@@ -3,15 +3,16 @@
 **Last worked:** 11 August 2026 — **all four workflows built**, form built, field migrated
 **Remaining:** test pass → form onto the landing page → Loom pitch → Raven walkthrough
 
-**Next action:** the **test pass** in `automations.md` — one contact through all four workflows.
-Every build step is done; nothing has ever fired. It closes the remaining verification items and
-produces every screenshot the videos need. Shorten the waits from the table in that section, run
-it, **restore every one**, delete the test contact.
+**Next action:** the **short test pass** — `automations.md` → "Decided 11 Aug — run the short
+version". Every build step is done; nothing has ever fired. About fifteen minutes, **one wait
+shortened instead of ten**, and it produces both HTML emails in a real inbox plus the mid-flight
+screenshots. The full four-workflow pass is kept in that file but is deliberately not being run
+for a pitch.
 
-**The one thing to watch in that run:** three of A1's four branches reach the 24h nurture by a
-`Go to` jump rather than a drawn connector, because GHL won't let branches converge. Step 1 of
-the run picks the multi-unit option precisely to prove that path. If the portfolio email lands
-and the nurture never does, that's the cause.
+**Two things that will bite in that run:** ① **Submit and let the nurture land before you book.**
+A1 checks `Last appointment is empty`, so booking first routes the six-signs email to `END` and
+you lose the best shot in the pitch. ② Rename the three `Go to` steps and three `Wait`s *before*
+the screenshots — the mid-flight shots only exist once.
 
 ---
 
