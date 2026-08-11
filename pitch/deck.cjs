@@ -131,7 +131,128 @@ const sections = [
    "Four workflows. A reply inside sixty seconds, then a sequence that branches on who the lead actually is.",
    "What I can build for you: the part that runs when nobody is at their desk."]
 ];
-sections.forEach(function (sec) {
+function adSlides() {
+  /* 4a · the carousel itself */
+  const a = pres.addSlide();
+  darkBg(a);
+  a.addText("NINE SLIDES, ONE ARGUMENT", {
+    x: 0.62, y: 0.42, w: 6, h: 0.3,
+    fontFace: SANS, fontSize: 11, bold: true, charSpacing: 2.2, color: COPPER, margin: 0
+  });
+  a.addText("Hook, six signs, then the counterweight", {
+    x: 0.6, y: 0.78, w: 8.8, h: 0.5,
+    fontFace: SERIF, fontSize: 27, bold: true, color: CHALK, margin: 0
+  });
+
+  const shots = [
+    ["img/card-hook.png", "01 · the hook"],
+    ["img/card-sign.png", "03 · one of six signs"],
+    ["img/card-cta.png",  "09 · the ask"]
+  ];
+  shots.forEach(function (sh, i) {
+    const w = 2.32, h = 2.9, x = 0.72 + i * 2.92, y = 1.5;
+    a.addImage({
+      path: sh[0], x: x, y: y, w: w, h: h,
+      shadow: { type: "outer", blur: 12, offset: 3, angle: 90, color: "000000", opacity: 0.35 }
+    });
+    a.addText(sh[1], {
+      x: x, y: y + h + 0.1, w: w, h: 0.28,
+      fontFace: SANS, fontSize: 11, color: MUTED, align: "center", margin: 0
+    });
+  });
+  a.addText("Every peso figure on these cards is a real range from the price list.", {
+    x: 0.62, y: 4.94, w: 8.8, h: 0.3,
+    fontFace: SANS, fontSize: 12, italic: true, color: MUTED, margin: 0
+  });
+  a.addNotes(
+    "Say: nine slides that argue one thing — most roofs get replaced when they needed a repair. " +
+    "The diagrams are hand-drawn, not stock. Do not narrate each card."
+  );
+
+  /* 4b · one source, three ratios */
+  const b = pres.addSlide();
+  b.background = { color: CHALK };
+  b.addText("ONE SOURCE, THREE RATIOS", {
+    x: 0.62, y: 0.42, w: 6, h: 0.3,
+    fontFace: SANS, fontSize: 11, bold: true, charSpacing: 2.2, color: COPPER, margin: 0
+  });
+  b.addText("Nothing gets a bad crop", {
+    x: 0.6, y: 0.78, w: 8.8, h: 0.5,
+    fontFace: SERIF, fontSize: 27, bold: true, color: SLATE, margin: 0
+  });
+
+  const ratios = [
+    ["img/ratio-45.png",  2.16, 2.7,  "4:5 · feed"],
+    ["img/ratio-11.png",  2.4,  2.4,  "1:1 · carousel card"],
+    ["img/ratio-916.png", 1.72, 3.05, "9:16 · Stories and Reels"]
+  ];
+  const gap = 0.62;
+  const totalW = ratios.reduce(function (t, r) { return t + r[1]; }, 0) + gap * (ratios.length - 1);
+  let cx = (10 - totalW) / 2;
+  const baseline = 4.42;                       // all three sit on one baseline
+  ratios.forEach(function (r) {
+    b.addImage({
+      path: r[0], x: cx, y: baseline - r[2], w: r[1], h: r[2],
+      shadow: { type: "outer", blur: 10, offset: 2, angle: 90, color: "16232E", opacity: 0.18 }
+    });
+    b.addText(r[3], {
+      x: cx - 0.3, y: baseline + 0.12, w: r[1] + 0.6, h: 0.28,
+      fontFace: SANS, fontSize: 11, bold: true, color: STORM, align: "center", margin: 0
+    });
+    cx += r[1] + gap;
+  });
+  b.addText("Same HTML source, three viewport-height media queries. Fix a typo once, re-render three times.", {
+    x: 0.6, y: 4.94, w: 8.8, h: 0.3,
+    fontFace: SANS, fontSize: 12, italic: true, color: STORM, align: "center", margin: 0
+  });
+  b.addNotes(
+    "The line that lands here: excluding Stories to dodge a bad crop is the wrong instinct — " +
+    "supply the right crop instead."
+  );
+
+  /* 4c · four ads, one test */
+  const c = pres.addSlide();
+  darkBg(c);
+  ring(c, 8.0, 3.3, 2.6, 1);
+  c.addText("FOUR ADS, ONE TEST", {
+    x: 0.62, y: 0.42, w: 6, h: 0.3,
+    fontFace: SANS, fontSize: 11, bold: true, charSpacing: 2.2, color: COPPER, margin: 0
+  });
+  c.addText("Written so the result means something", {
+    x: 0.6, y: 0.78, w: 8.8, h: 0.5,
+    fontFace: SERIF, fontSize: 27, bold: true, color: CHALK, margin: 0
+  });
+
+  const drafts = [
+    ["six-signs-carousel", "The full educational sequence"],
+    ["story-7800",         "Photo · English testimonial"],
+    ["taglish-380k",       "Same creative, Taglish interrupt — isolates copy"],
+    ["the-18-peso-part",   "Diagram instead of photo — isolates creative"]
+  ];
+  drafts.forEach(function (d, i) {
+    const y = 1.62 + i * 0.72;
+    numeral(c, i + 1, 0.66, y + 0.03, 0.4, COPPER, CHALK);
+    c.addText(d[0], {
+      x: 1.24, y: y - 0.04, w: 2.9, h: 0.3,
+      fontFace: SANS, fontSize: 13.5, bold: true, color: COPPER, margin: 0
+    });
+    c.addText(d[1], {
+      x: 1.24, y: y + 0.22, w: 6.4, h: 0.3,
+      fontFace: SANS, fontSize: 13, color: CHALK, margin: 0
+    });
+  });
+  c.addText("Two pairs, one variable each. Four ads that can actually tell you why one won.", {
+    x: 0.62, y: 4.72, w: 8.8, h: 0.35,
+    fontFace: SANS, fontSize: 13, italic: true, color: MUTED, margin: 0
+  });
+  c.addNotes(
+    "This is the strategy beat, and it is rarer than being able to make a nice image. " +
+    "Say: two of these share creative so the only variable is the copy, and one swaps the " +
+    "photo for a diagram against the same promise. A test you can learn from, not four guesses."
+  );
+}
+
+sections.forEach(function (sec, si) {
   const s = pres.addSlide();
   darkBg(s);
   ring(s, 7.6, 1.05, 3.4, 1.25);
@@ -160,6 +281,7 @@ sections.forEach(function (sec) {
     "not the description. The description is there so you remember the angle." +
     (sec[4] ? "\n\n" + sec[4] : "")
   );
+  if (si === 1) adSlides();          // the two creative slides follow "02 · The ads"
 });
 
 /* ─────────────── 7 · close ─────────────── */

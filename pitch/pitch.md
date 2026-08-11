@@ -13,7 +13,7 @@ Everything for this video lives in this folder:
 |---|---|
 | `script.md` | **What you say.** Verbatim for the open and close, bullets for the demo |
 | `pitch.md` | This file — what's on screen when, the pre-flight, and the bar |
-| `deck.pptx` | The 7 slides. Talk track is in the speaker notes |
+| `deck.pptx` | The 10 slides, carousel creative included. Talk track is in the speaker notes |
 | `deck.cjs` | Source for the deck. `npm install pptxgenjs` once, then `node deck.cjs deck.pptx` |
 
 *(The generator is `.cjs`, not `.js` — a `package.json` further up the tree sets
@@ -25,9 +25,9 @@ Everything for this video lives in this folder:
 
 | | |
 |---|---|
-| **Swap the booking link** | Slide 7 reads `REPLACE WITH YOUR BOOKING LINK` in green. Do not film it that way |
+| **Swap the booking link** | Slide 10 reads `REPLACE WITH YOUR BOOKING LINK` in green. Do not film it that way |
 | **Rename A1's generic steps** | Three `Go to` and three `Wait` steps all carry default labels. The canvas is a hero shot; make it readable |
-| **Open every tab in advance** | Landing page · GHL pipeline board · A1 canvas · `../emails/email-2-nurture.html` in a browser tab · `../carousel/out/` in an image viewer · the deck |
+| **Open every tab in advance** | Landing page · GHL pipeline board · A1 canvas · `../emails/email-2-nurture.html` in a browser tab · the deck |
 | **Zoom to 125–150%** | Especially the pipeline board and the workflow canvas. Small text is the most common failure on this brief |
 | **Close the plumbing** | Trust Center / A2P pages · anything showing this is ARCA's sub-account · Vercel dashboard · your editor (`.env.local` sits in the project root) · billing · password managers |
 | **Quiet room, one rehearsal** | Twice through out loud. Not scripted — you want it to sound like you know it, because you do |
@@ -44,7 +44,7 @@ thing in this project sits in one place, and that place is Meta.
 | Pipeline board | **Live** | One screen, no hunting, looks its best in motion |
 | A1 canvas | **Live, pre-positioned** | See the warning below |
 | The email | **Live-ish** — local HTML in a browser tab | Renders full-bleed, no builder chrome, inline-styled so it's what actually sends |
-| Ads | **⛔ Prepared creative only** | Draft 1 is part-built and 2–4 don't exist in Ads Manager. Show `../carousel/out/` and `../ad-drafts.md` instead |
+| Ads | **⛔ In the deck** | Draft 1 is part-built and 2–4 don't exist in Ads Manager. Slides 5–7 carry the creative, so there is nothing to switch to |
 
 **⚠ Pre-position the A1 canvas before you record.** It's a wide tree, and panning around hunting
 for a step is exactly where the video looks fumbly. Frame it so the trigger and the four-way
@@ -67,12 +67,12 @@ pretty email on screen" bar on its own.
 | **0:45–0:50** | Slide 3 | Flash card, two seconds |
 | **0:50–1:35** | **Landing page, live** | Scroll it. The promise in the hero · prices published in public, which almost nobody in this market does · the form near the bottom and *why* it asks what it asks. Land on: *"I can build you a page that earns the click it paid for"* |
 | **1:35–1:40** | Slide 4 | Flash card |
-| **1:40–2:20** | **Rendered creative — ⛔ not Ads Manager** | The nine slides from `../carousel/out/`, the three ratios side by side, the four hook angles from `../ad-drafts.md`. One creative source, three ratios, so nothing gets a bad crop. *"I can build the creative and the copy, not just place the buy"* |
-| **2:20–2:25** | Slide 5 | Flash card |
+| **1:40–2:20** | **Slides 5, 6, 7 — ⛔ never Ads Manager** | The creative is in the deck now, so this whole section runs without leaving it. Carousel cards · the same card at three ratios · the four-ad test matrix. *"I can build the creative and the copy, not just place the buy"* |
+| **2:20–2:25** | Slide 8 | Flash card |
 | **2:25–3:05** | **Pipeline board** | Six stages, fifteen real leads, real peso values. Two decisions worth naming: **Lost isn't a stage** — dead deals keep their position and get a status plus a `nurture-may` tag, so the board shows *where* money dies instead of hiding it in a graveyard column. And the testimonials on the page use names from this board — *"the page, the board and the emails are one consistent world"* |
-| **3:05–3:10** | Slide 6 | Flash card |
+| **3:05–3:10** | Slide 9 | Flash card |
 | **3:10–4:10** | **A1 canvas → the email** | The big one, and where the range shows. Trigger fires on form submit · a reply inside sixty seconds · then it **branches on who the lead actually is** — a landlord with twelve roofs should never get an email about one ceiling stain. Then **cut to the rendered email full screen** and let it sit for a beat. *"And the follow-up it sends looks like this"* |
-| **4:10–4:45** | Slide 7 | The close. Say the next step out loud — don't let the slide carry it alone |
+| **4:10–4:45** | Slide 10 | The close. Say the next step out loud — don't let the slide carry it alone |
 
 **The single strongest 20 seconds in the whole video** is the cut from the branching workflow to
 the rendered email. One shows the thinking, the other shows the craft. Don't rush it.
@@ -107,7 +107,7 @@ everything else in this video earns.
 | Range: page · ads · CRM · automations + email | All four have a slot |
 | At least one pretty email on screen | 3:10–4:10, rendered from the local HTML file |
 | POV on what you can do for the viewer | Every section card ends on a *"what I can build for you"* line — say those, not the descriptions |
-| Opens with who you are, ends with a next step | Slides 1 and 7 |
+| Opens with who you are, ends with a next step | Slides 1 and 10 |
 | Passwords, keys, billing, messy tabs hidden | Pre-flight table |
 
 ---
