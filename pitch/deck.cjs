@@ -120,7 +120,10 @@ const sections = [
    "What I can build for you: a page that earns the click it paid for."],
   ["02", "The ads",
    "Nine carousel slides and four ad drafts, built from one creative source and rendered at three ratios.",
-   "What I can build for you: creative that survives every placement without a bad crop."],
+   "What I can build for you: creative that survives every placement without a bad crop.",
+   "ON SCREEN NEXT: the rendered creative from carousel/out and the four hook angles from " +
+   "ad-drafts.md. Do NOT open Ads Manager — the drafts in there are part-built, and this is the " +
+   "section meant to prove range."],
   ["03", "The CRM",
    "Six stages from new lead to won, fifteen real leads on the board, and dead deals that keep their history.",
    "What I can build for you: a pipeline that tells you where money actually stalls."],
@@ -154,7 +157,8 @@ sections.forEach(function (sec) {
   });
   s.addNotes(
     "Flash card — two seconds, then switch to the live screen. Say the 'what I can build for you' line, " +
-    "not the description. The description is there so you remember the angle."
+    "not the description. The description is there so you remember the angle." +
+    (sec[4] ? "\n\n" + sec[4] : "")
   );
 });
 

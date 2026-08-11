@@ -32,6 +32,25 @@ Everything for this video lives in this folder:
 | **Close the plumbing** | Trust Center / A2P pages · anything showing this is ARCA's sub-account · Vercel dashboard · your editor (`.env.local` sits in the project root) · billing · password managers |
 | **Quiet room, one rehearsal** | Twice through out loud. Not scripted — you want it to sound like you know it, because you do |
 
+### Live screen, or a prepared asset?
+
+**The rule: live where it proves the work is real, a prepared asset where live would show the
+seams.** A screenshot of a CRM could be anyone's; a live scroll couldn't. But every unfinished
+thing in this project sits in one place, and that place is Meta.
+
+| Asset | How to show it | Why |
+|---|---|---|
+| Landing page | **Live** | Public URL, loads fast, and scrolling it is inherently convincing |
+| Pipeline board | **Live** | One screen, no hunting, looks its best in motion |
+| A1 canvas | **Live, pre-positioned** | See the warning below |
+| The email | **Live-ish** — local HTML in a browser tab | Renders full-bleed, no builder chrome, inline-styled so it's what actually sends |
+| Ads | **⛔ Prepared creative only** | Draft 1 is part-built and 2–4 don't exist in Ads Manager. Show `../carousel/out/` and `../ad-drafts.md` instead |
+
+**⚠ Pre-position the A1 canvas before you record.** It's a wide tree, and panning around hunting
+for a step is exactly where the video looks fumbly. Frame it so the trigger and the four-way
+branch are visible together, then pan **once**, down to the tail. Don't zoom and scroll live
+looking for things.
+
 **The pretty email does not need the test pass.** Open `../emails/email-2-nurture.html` directly in
 Chrome. It renders full-bleed with no builder chrome and no inbox clutter, and the email is
 fully inline-styled, so what you see is what actually sends. That satisfies the "at least one
@@ -48,7 +67,7 @@ pretty email on screen" bar on its own.
 | **0:45–0:50** | Slide 3 | Flash card, two seconds |
 | **0:50–1:35** | **Landing page, live** | Scroll it. The promise in the hero · prices published in public, which almost nobody in this market does · the form near the bottom and *why* it asks what it asks. Land on: *"I can build you a page that earns the click it paid for"* |
 | **1:35–1:40** | Slide 4 | Flash card |
-| **1:40–2:20** | **Carousel + ad drafts** | The nine slides from `../carousel/out/`. One creative source, three ratios — feed, square, Stories — so nothing gets a bad crop. Four hook angles written against the same offer. *"I can build the creative and the copy, not just place the buy"* |
+| **1:40–2:20** | **Rendered creative — ⛔ not Ads Manager** | The nine slides from `../carousel/out/`, the three ratios side by side, the four hook angles from `../ad-drafts.md`. One creative source, three ratios, so nothing gets a bad crop. *"I can build the creative and the copy, not just place the buy"* |
 | **2:20–2:25** | Slide 5 | Flash card |
 | **2:25–3:05** | **Pipeline board** | Six stages, fifteen real leads, real peso values. Two decisions worth naming: **Lost isn't a stage** — dead deals keep their position and get a status plus a `nurture-may` tag, so the board shows *where* money dies instead of hiding it in a graveyard column. And the testimonials on the page use names from this board — *"the page, the board and the emails are one consistent world"* |
 | **3:05–3:10** | Slide 6 | Flash card |

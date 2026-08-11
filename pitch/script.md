@@ -53,7 +53,16 @@ Scroll it steadily. Talk about the decisions, not the sections.
 
 ---
 
-## 1:40–2:20 · Slide 4, then `../carousel/out/` and the ad drafts
+## 1:40–2:20 · Slide 4, then the rendered creative
+
+> ⛔ **Do not open Ads Manager.** Show the finished creative from `../carousel/out/` and the copy
+> from `../ad-drafts.md`. The drafts inside Meta are part-built, and this is the section meant to
+> prove range — don't put the least-finished thing on screen during it. Nobody watching a
+> capability pitch wants a tour of the Ads Manager UI; they want to know whether you can make an
+> ad that works.
+
+**On screen:** the nine carousel PNGs full size, then the same card at 4:5, 1:1 and 9:16 side by
+side, then the four hook angles from `../ad-drafts.md`.
 
 - Nine slides. Founder story hook, six signs, then the counterweight and the call
 - **One creative source, three ratios** — feed, square, Stories — so nothing gets a bad crop on any placement
