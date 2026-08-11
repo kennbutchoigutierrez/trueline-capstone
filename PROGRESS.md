@@ -149,10 +149,21 @@ Form `Trueline — Roof Check Request`, embed id **`ys8URRJqtAmloGrhk5lo`**. Fou
 fields, the v2 dropdown at position 5, the free-text field, redirect to the booking calendar,
 brand styling applied. Not published to any funnel.
 
-**Still to do: paste the embed into `site/index.html` above the final CTA at ~line 586** (the
-copper band). Give the iframe a `min-height` — `height:100%` with `data-height="undefined"`
-collapses to a zero-height box until `form_embed.js` resizes it. That push also gives the
-first real proof the dropdown renders single-select to a visitor.
+**✅ Now on the live page — 12 Aug.** Section 11, `band-white`, `id="request"`, headed
+*"Start with four questions."*, sitting between the FAQ and the copper CTA. The iframe carries
+a `min-height:700px` instead of GHL's `height:100%`, which collapses to a zero-height box until
+`form_embed.js` resizes it. Deployed and the section is confirmed live.
+
+**⚠ One thing still needs a human eye:** whether the iframe actually *renders the form*, and
+whether the dropdown shows as single-select to a visitor. A markdown fetch can confirm the
+section shipped but cannot see inside an iframe. **Open the page and look before filming** —
+that's the first real proof the field migration worked end to end.
+
+**Open decision: every CTA still points at the booking calendar, not the form.** That is
+deliberate for now — someone ready to book shouldn't be made to fill in a form first — but it
+means the form only catches people who scroll to it. If the pitch narrative leans on
+segmentation, consider pointing the hero CTA at `#request` and leaving the copper band on the
+calendar.
 
 ## 3 · The test pass — the last real build step
 
@@ -181,7 +192,7 @@ list is further down this file.
 
 ---
 
-## The architecture gap — closed in GHL, one push from closed on the page
+## The architecture gap — ✅ closed, 12 Aug
 
 **Was:** every CTA in `site/index.html` linked straight to the booking widget, so a visitor who
 didn't book never became a contact — which left A1's nurture with no real audience and made the
@@ -190,9 +201,9 @@ four-way segment branch unrunnable.
 **Now:** the form exists and the segmentation field is single-select. A1's trigger becomes
 `Form Submitted`, and the branch reads `contact.what_do_you_need_v2`.
 
-**One step remains:** paste embed `ys8URRJqtAmloGrhk5lo` into `site/index.html` above the final
-CTA (~line 586) with a `min-height`, and push. Until then the live page still has no form, so
-the gap is closed in GHL and open on the web.
+**Closed on the web too.** Embed `ys8URRJqtAmloGrhk5lo` is live in `site/index.html` as section
+11, deployed. A visitor who isn't ready to book can now become a contact, which is what gives
+A1's nurture an audience and the four-way branch something to branch on.
 
 **Still true and still the reason any of this matters:** without the form, every segment gets
 the homeowner nurture, and a landlord with twelve roofs receives an email about one ceiling
