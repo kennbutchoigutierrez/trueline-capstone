@@ -82,7 +82,7 @@ Scroll it steadily. Talk about the decisions, not the sections.
 
 ---
 
-## 2:25–3:05 · Slide 5, then the pipeline board
+## 2:25–3:05 · Slide 8, then the pipeline board
 
 - Six stages, fifteen real leads, real values on the board
 - **Lost isn't a stage.** Dead deals keep their position and get a status and a nurture tag, so the board shows you *where* money dies instead of hiding it in a graveyard column at the end
@@ -91,7 +91,7 @@ Scroll it steadily. Talk about the decisions, not the sections.
 
 ---
 
-## 3:10–4:10 · Slide 6, then A1's canvas → the email
+## 3:10–4:10 · Slide 9, then A1's canvas → the email
 
 **The most important minute in the video.** Canvas first, then cut to the rendered email and
 let it sit for a beat before you say anything.
@@ -101,13 +101,30 @@ let it sit for a beat before you say anything.
 - If they still haven't booked, it follows up on its own for four days and then closes the file and tags them for the next season
 - **[cut to the email, full screen, pause]** 🎯 *"And the follow-up it sends looks like this."*
 - 🎯 *"That's the part that runs at nine on a Sunday night when nobody's at their desk."*
+- Then name the other three in one breath — 🎯 *"and there are three more behind it: one that protects the booking, one that rescues a no-show, and one that chases the quotation."*
 
 **If asked, or in passing:** the SMS layer is built and sitting behind A2P registration, a US
 carrier requirement that catches every new sub-account. It works the day that clears.
 
+### Reference · the four workflows
+
+**Show A1 only.** It's the one with the branch, and the branch is the interesting part. Opening
+four canvases turns a pitch into a tutorial. This table is here so you can answer a question
+about any of them without hunting.
+
+| | Fires when | What it does | Why it exists |
+|---|---|---|---|
+| **A1** Speed-to-Lead | Someone submits the form | Reply and an owner task inside 60 seconds · opportunity set to New Lead · **branches four ways on what they said they need** · no booking: nurture at 24h, second touch day 4, then closes the file and tags for next season | **Speed, then relevance.** Most businesses lose the lead in the first hour — and the ones that don't still send everybody the same thing |
+| **A2** Confirm & Show-Up | They book a call | Card moves to Call Booked · branded confirmation email · reminders ahead of the appointment | **Protects the booking.** A booked call nobody turns up to is worse than no booking |
+| **A2b** No-Show Rescue | The appointment is marked No Show | Two-touch rescue, and the card returns to Contacted instead of dying | **A no-show isn't a dead lead.** Most setups just abandon it |
+| **A3** Quote Follow-Up | The deal moves to Quote Sent | Day 3, a straight "any questions on the quotation?" · day 7, the seasonal note · day 14, closes it out and tags for nurture | **The stage where money actually stalls.** The quote goes out and then everyone goes quiet |
+
+🎯 **If you say one thing about the set:** *"Every one of them either moves the deal forward or
+files it properly. Nothing sits in an inbox waiting for someone to feel like following up."*
+
 ---
 
-## 4:10–4:45 · Slide 7 🎯 Learn this one
+## 4:10–4:45 · Slide 10 🎯 Learn this one
 
 > So that's the system: a page, the ads that feed it, a CRM behind it, and the follow-up wired
 > across all of it.
