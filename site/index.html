@@ -205,6 +205,15 @@ details summary::after{content:"+";color:var(--copper);font-family:var(--sans);f
 details[open] summary::after{content:"–"}
 details p{margin-top:14px;font-size:17px}
 
+/* form */
+.formband{text-align:center}
+.formband p{max-width:660px;margin:0 auto}
+.formwrap{max-width:680px;margin:32px auto 0;text-align:left}
+.formwrap iframe{
+  display:block;width:100%;min-height:700px;border:none;border-radius:8px;background:#fff
+}
+.formnote{margin-top:18px;font-size:14px;opacity:.75}
+
 /* final cta */
 .final{text-align:center}
 .final p{max-width:720px;margin-left:auto;margin-right:auto}
@@ -582,7 +591,30 @@ footer strong{
   </div>
 </section>
 
-<!-- 11 · final cta -->
+<!-- 11 · the form -->
+<section class="band-white formband" id="request">
+  <div class="wrap">
+    <h2>Start with four questions.</h2>
+    <p class="lede">Thirty seconds, then you pick a time. Tell us what you need and the call starts in the right place &mdash; a leak in your ceiling is a different conversation from twelve rental roofs before the rains.</p>
+    <div class="formwrap">
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/ys8URRJqtAmloGrhk5lo"
+        id="inline-ys8URRJqtAmloGrhk5lo"
+        data-layout="{'id':'inline'}"
+        data-trigger-type="alwaysShow"
+        data-form-name="Trueline — Roof Check Request"
+        data-height="undefined"
+        data-layout-iframe-id="inline-ys8URRJqtAmloGrhk5lo"
+        data-form-id="ys8URRJqtAmloGrhk5lo"
+        title="Trueline — Roof Check Request">
+      </iframe>
+    </div>
+    <p class="formnote">Rommel replies within the hour, Mon&ndash;Sat. Nobody climbs anything until you say so.</p>
+  </div>
+</section>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
+
+<!-- 12 · final cta -->
 <section class="band-copper final">
   <div class="wrap">
     <h2>Get a straight answer about your roof.</h2>
@@ -593,7 +625,7 @@ footer strong{
   </div>
 </section>
 
-<!-- 12 · footer -->
+<!-- 13 · footer -->
 <footer>
   <div class="wrap">
     <div class="cols-3">
