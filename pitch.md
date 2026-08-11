@@ -7,6 +7,7 @@ to someone who might hire you. The Trueline system is the evidence, not the subj
 for you,"* never *"here is what I clicked."* Every time you catch yourself narrating the screen,
 switch to what the thing on screen would be worth to the person watching.
 
+Script: `pitch-script.md` — verbatim for the open and close, bullets for the demo.
 Deck: `pitch-deck.pptx` (7 slides, talk-track in the speaker notes). Source: `deck.js` —
 edit and re-run `node deck.js pitch-deck.pptx` to rebuild.
 
