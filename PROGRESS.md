@@ -1,14 +1,17 @@
 # PROGRESS.md — Trueline Roof Care capstone
 
-**Last worked:** 11 August 2026 — form built, field migrated, A2 + A2b + A3 built, A1 in progress
-**Remaining:** finish A1 → test pass → form onto the landing page → Loom pitch → Raven walkthrough
+**Last worked:** 11 August 2026 — **all four workflows built**, form built, field migrated
+**Remaining:** test pass → form onto the landing page → Loom pitch → Raven walkthrough
 
-**Next action:** send **paste 4** in `automations.md` → "The pastes used on 11 Aug". It resumes
-A1 from the four-way branch and runs to the end of the workflow in a single message — steps 1–4
-are saved and the trigger swap is clean, so it skips them; the branch panel was left mid-edit
-with a stuck chevron, so it reloads first. Full state in §1b. Then the **test pass** in
-`automations.md` — one contact through all four workflows, closing twelve verification items and
-producing every screenshot the videos need.
+**Next action:** the **test pass** in `automations.md` — one contact through all four workflows.
+Every build step is done; nothing has ever fired. It closes the remaining verification items and
+produces every screenshot the videos need. Shorten the waits from the table in that section, run
+it, **restore every one**, delete the test contact.
+
+**The one thing to watch in that run:** three of A1's four branches reach the 24h nurture by a
+`Go to` jump rather than a drawn connector, because GHL won't let branches converge. Step 1 of
+the run picks the multi-unit option precisely to prove that path. If the portfolio email lands
+and the nurture never does, that's the cause.
 
 ---
 
@@ -29,10 +32,13 @@ Push to `main` and Vercel redeploys the landing page. `vercel.json` sets
 
 | Workflow | GHL id | State |
 |---|---|---|
-| **A1 — Speed-to-Lead** | `96922823-9be4-47e2-bae4-0faffb31a570` | 🔨 mid-build 11 Aug |
-| **A2 — Appointment Confirm & Show-Up** | `11f3fabb-…` | ✅ built |
-| **A2b — No-Show Rescue** | *unrecorded* | ✅ built |
-| **A3 — Quote Follow-Up** | *unrecorded* | ✅ built |
+| **A1 — Speed-to-Lead** | `96922823-9be4-47e2-bae4-0faffb31a570` | ✅ built 11 Aug, all 14 steps |
+| **A2 — Appointment Confirm & Show-Up** | `11f3fabb-…` *(partial — grab the rest)* | ✅ built |
+| **A2b — No-Show Rescue** | `38080f50-6d24-4703-bc5f-2ec336f6f7b2` | ✅ built |
+| **A3 — Quote Follow-Up** | `bd4487b1-a21c-43e4-8386-1418a62afece` | ✅ built |
+
+All four in **Draft**. A3's canvas title reads `Trueline Roof - A3 — Quote Follow-Up`; it was
+identified by content, which is the rule working.
 
 ⚠ **Identify workflows by id and canvas content, never by title.** A1's and A2's titles were
 found attached to each other's workflows on 11 Aug — both contain an HTML email, so trusting
@@ -49,12 +55,29 @@ the titles would have damaged the wrong one. Renamed, but the habit stands.
   converted. Live field is **`contact.what_do_you_need_v2`**, single-select. The old
   `contact.what_do_you_need` is deleted.
 
-## 1b · A1 — exactly where the build stopped, 11 Aug
+## 1b · A1 — finished 11 Aug, and what the resume proved
 
-The extension reported before stopping, so A1's state is **known**, not a mystery. Workflow
-`96922823-9be4-47e2-bae4-0faffb31a570`, still in Draft.
+**The interrupted session had saved nothing of the branch.** On reload the entire four-way
+If/Else was missing — not a half-built branch 1, but no branch at all. All four were built
+fresh, all fourteen steps now exist, settings are set, workflow is in Draft.
 
-### ✅ Done and saved
+**Recording the stop as "unsaved, unconfirmed" rather than guessing is what made this safe.**
+The dangerous case was a half-saved branch 1 that a rebuild would have silently duplicated.
+
+**Three things the resume settled**, all detailed in `automations.md` → "A1 · Speed-to-Lead —
+✅ built 11 Aug":
+
+- **The four stored values are ordinary snake_case slugs of the sentence labels** —
+  `my_house_has_a_leak_or_damage` and so on — not the long opaque strings three sessions of
+  notes warned about. The one trap is the dropped apostrophe: `im_building_new_and_have_plans`.
+- **GHL branches cannot converge by drag.** Three branches reach the shared Wait through the
+  **`Go to` internal action**. It's a jump, not a wire, so the canvas *looks* like three
+  dead-ending branches. The test pass has to prove that path carries.
+- **The three carried-over unknowns are clean:** Wait reads 24 hours, the 9 Aug branch
+  inversion is still fixed, and email 2's HTML survived — wordmark as text, copper button.
+  Read via side-panel preview only, so the screenshots are the second look.
+
+### ✅ The steps that survived the interruption
 
 | | |
 |---|---|
@@ -66,28 +89,16 @@ The extension reported before stopping, so A1's state is **known**, not a myster
 | **Step 3** Add Task | Added — two deviations, see below |
 | **Step 4** Update Opportunity | Pipeline `Trueline Roof Leads`, stage `New Lead` |
 
-**The trigger being clean is the good news.** That was the one item where a mid-build stop could
-have left A1 double-firing or unable to fire at all, invisibly. It didn't.
+**The trigger being clean was the good news.** That was the one item where a mid-build stop
+could have left A1 double-firing or unable to fire at all, invisibly. It didn't.
 
-### 🔨 Step 5 — the four-way If/Else, unsaved and mid-edit
+### ✅ Built on the resume
 
-Field and operator are set (`What do you need?` / `Is`) and **branch 1's value was selected via
-GHL's native picker** — `My house has a leak or damage` — which also answers an open question:
-**the If/Else does offer a picker**, so the long auto-generated values never need hand-typing.
-
-Then duplicating that branch to make the other three left the panel showing one collapsed
-`Branch` row plus `None`, and the expand chevron stopped responding. **Neither Save nor Cancel
-was clicked**, so nothing is corrupted — but branch 1's condition cannot be visually confirmed.
-
-**Next move: reload the page.** Saved steps survive a reload; only the unsaved panel state is
-lost, and that state is already unreadable. Then re-read branch 1 and continue.
-
-### ⏳ Not started
-
-The other three branches and their Tag/Email actions · steps 9–14 (Wait 3 days → If/Else on
-appointment → `A1-SMS-2` → Wait 1 day → status `Lost` → tag `nurture-may`) · workflow settings
-(re-entry OFF, stop on reply ON) · re-verification of the pre-existing steps 6–8, including that
-email 2's HTML is untouched and the Wait still reads 24 hours.
+Step 5's four-way branch — all four conditions from the picker, all four tags applied
+(`repair` needed a second pass; the tag was missed the first time), plus the multi-unit and
+new-build emails · steps 9–14 (Wait 3 days → If/Else on appointment → `A1-SMS-2` → Wait 1 day →
+status `Lost` → tag `nurture-may`) · workflow settings, re-entry OFF and stop on reply ON ·
+`A1-SMS-2` saved clean with no number, like the other four SMS steps.
 
 ### ⚠ Two deviations awaiting sign-off
 
@@ -103,9 +114,10 @@ and arguably correct** — an overdue speed-to-lead task sorts to the top of the
 where it belongs. The real 60-second promise is carried by the instant email, not the task; the
 task is a human nudge.
 
-**Still never obtained:** the A2b and A3 workflow ids.
+**Now obtained:** A2b and A3's workflow ids, after being clipped from three reports in a row.
+Only A2's full id is still partial.
 
-**The prompt pattern that works** — established across five tasks today, and worth reusing:
+**The prompt pattern that works** — established across six tasks today, and worth reusing:
 
 1. **Point at the raw GitHub URL**, never inline the content
 2. **Pre-authorise everything that will look like a mistake**, or it stops to query each one:
@@ -119,6 +131,14 @@ task is a human nudge.
 **It reads the file back to you before acting** and refuses to execute web-content instructions
 without an explicit go-ahead. That costs one round trip and is worth it — it caught the swapped
 workflow titles, the locked field type and the key collision, and was right all three times.
+
+5. **When the readback is the cost, invert the paste: instructions inline, data by URL.** The
+   A1 resume paste (paste 4 in `automations.md`) carried the steps in the message and used the
+   raw file only for the four message bodies, so there was nothing web-sourced to authorise.
+   **It ran the whole remaining workflow in one message with no round trip** — and still
+   self-corrected the missed `repair` tag and reported the `Go to` constraint it wasn't asked
+   about. Pre-authorising the three things that look like mistakes, and naming three stop
+   conditions instead of a blanket "check with me," is what let it run unattended.
 
 ## 2 · The segmentation form — ✅ built
 
@@ -222,7 +242,7 @@ anything is posted publicly.
 | 6 | Instagram carousel | ✅ **Done — 9 slides, rendered to `carousel/out/`** |
 | 7 | Facebook ad draft | 🔨 Assets + copy done (`ad-drafts.md`) · campaign + ad set built · draft 1 part-built, drafts 2–4 to go |
 | 8 | Two pretty HTML emails | 🔨 Both built · **email 1 live in GHL, test arrived styled** · email 2 still to paste into A1 |
-| 9 | Three GHL automations | 🔨 **A2, A2b and A3 built 11 Aug** · A1 last — needs the custom field switched to single-select first |
+| 9 | Three GHL automations | ✅ **All four built 11 Aug** (A1, A2, A2b, A3) · none has ever fired — the test pass is what makes them real |
 | 10 | **Loom capability pitch** — the hero deliverable | ⬜ Not started |
 | 11 | Raven Day 5 walkthrough | ⬜ Not started |
 

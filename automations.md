@@ -24,10 +24,16 @@ extension opened each canvas instead of trusting the tab.
 
 | Workflow | GHL id | Identify by this content |
 |---|---|---|
-| **A1 — Speed-to-Lead** | `96922823-9be4-47e2-bae4-0faffb31a570` | `Contact Created` → Wait → If/Else `Last appointment is empty` → Send Email |
+| **A1 — Speed-to-Lead** | `96922823-9be4-47e2-bae4-0faffb31a570` | `Form Submitted` → email → SMS → task → four-way branch on `what_do_you_need_v2` |
 | **A2 — Appointment Confirm & Show-Up** | `11f3fabb-…` | `Customer Booked Appointment` filtered to `15-min Roof Check Call` |
-| **A2b — No-Show Rescue** | *unrecorded* | `Appointment Status = No Show` |
-| **A3 — Quote Follow-Up** | *unrecorded* | `Opportunity Stage Changed` → `Quote Sent` |
+| **A2b — No-Show Rescue** | `38080f50-6d24-4703-bc5f-2ec336f6f7b2` | `Appointment Status = No Show` |
+| **A3 — Quote Follow-Up** | `bd4487b1-a21c-43e4-8386-1418a62afece` | Wait → Email → If/Else `Still at Quote Sent?` |
+
+**All four ids are now recorded — 11 Aug.** A2b's and A3's had been clipped from three reports
+in a row. A2's remains a partial (`11f3fabb-…`); grab the full string next time A2 is open.
+
+**A3's canvas title reads `Trueline Roof - A3 — Quote Follow-Up`**, not the bare title this file
+uses. It was identified by content, which is the rule working as intended.
 
 **The numbering in this file is authoritative** — `brief.md` and `plan.md` use it too. Renaming
 two workflows in GHL is cheaper than renumbering three documents, and the presentation needs one
@@ -638,7 +644,71 @@ is worse than no filter, because the doc says you're covered.
 
 ---
 
-## A1 · Speed-to-Lead — unblocked, build last
+## A1 · Speed-to-Lead — ✅ built 11 Aug, end to end
+
+All fourteen steps exist, settings are set, workflow is in Draft. **All four workflows are now
+built.** Reported by the extension; the canvas screenshots are the confirmation pass.
+
+### The four stored values — recorded at last
+
+GHL slugged the sentence labels. **They are predictable snake_case, not the long opaque strings
+this file spent three sessions warning about:**
+
+| Label the visitor sees | Stored value A1 branches on |
+|---|---|
+| My house has a leak or damage | `my_house_has_a_leak_or_damage` |
+| No leak yet, I want my house checked before the rains | `no_leak_yet_i_want_my_house_checked_before_the_rains` |
+| I have an apartment, several units, or more than one house | `i_have_an_apartment_several_units_or_more_than_one_house` |
+| I'm building new and have plans | `im_building_new_and_have_plans` |
+
+Note `im_building_new`, not `i'm` — the apostrophe is dropped, not encoded. That is the one
+character a hand-typed condition would have got wrong.
+
+**`ghl-form.md`'s prediction was right:** editing the labels to the sentences regenerated the
+values from the sentences. The picker did offer all four, so nothing was typed.
+
+### ⚠ Branches cannot converge by drag — use `Go to`
+
+**New platform constraint, found in the build.** GHL will not let several branches feed one
+shared downstream node by dragging connectors. The four-way branch had to reach the existing
+Wait via the **`Go to` internal action** on three of the four branches; `repair` flows in
+directly because it inherited the original connection when the If/Else was inserted above it.
+
+**Why it matters beyond A1:** `Go to` is a jump, not a wire. Nothing on the canvas visually
+connects those three branches to the Wait, so anyone reading the canvas — including on camera —
+sees three branches that appear to dead-end. **The test pass must prove a multi-unit contact
+actually reaches the 24h nurture**, because that is precisely the kind of failure this platform
+produces silently. It is now a verification item below.
+
+The alternative was duplicating the Wait and everything under it four times, which would have
+meant four copies of the HTML email step. `Go to` is the right call.
+
+### Verified in the same pass — the three carried-over unknowns, all clean
+
+| | |
+|---|---|
+| Existing Wait | Reads **24 hours**, not the 1-minute test value |
+| Existing If/Else `Last appointment is empty` | Send Email on the **condition-MET** branch, `END` on else — the 9 Aug inversion is still fixed |
+| Existing HTML email | Intact. Wordmark live text, `Book a 15-minute roof check` button copper. Read via **side-panel preview only**, design editor never opened |
+| Both SMS steps | Saved with no error, no number and no A2P — as predicted |
+
+### What the interrupted session actually left behind: nothing
+
+**Branch 1 was not there after the reload. The entire four-way If/Else was missing.** So the
+unsaved panel really was unsaved — GHL persisted none of it, and all four branches were built
+fresh.
+
+**This is the reassuring answer, and it was the right call to check rather than assume.** The
+danger case was a half-saved branch 1 that a rebuild would have duplicated. Recording the stop
+as "unsaved, unconfirmed" instead of guessing either way is what made the resume paste safe to
+send as a single message.
+
+One self-correction inside the build: the Add Tag was initially missed on the `repair` branch
+and added on a second pass. All four branches carry their tag.
+
+---
+
+## A1 · Speed-to-Lead — the build sheet
 
 **No longer blocked.** The form exists (`Trueline — Roof Check Request`, embed ID
 `ys8URRJqtAmloGrhk5lo`) and the segmentation field was rebuilt as single-select on 11 Aug.
@@ -1049,15 +1119,23 @@ in GHL's preview.
 
 ### What this settles — the open list
 
-- [ ] A1's four-way If/Else offered a picker, and the four literal stored values
-- [ ] `Contact Created` is gone from A1
-- [ ] Email 2's HTML survived — wordmark as text, copper button, not blue
-- [ ] A1's existing Wait reads 24 hours and the email is on the condition-met branch
+- [x] A1's four-way If/Else offered a picker, and the four literal stored values — **settled
+      11 Aug**, values recorded in A1's built section above
+- [x] `Contact Created` is gone from A1 — **settled 11 Aug**, only `Form Submitted` remains
+- [x] Email 2's HTML survived — wordmark as text, copper button, not blue. **Reported clean;
+      read via side-panel preview only.** The screenshot pass is the second look
+- [x] A1's existing Wait reads 24 hours and the email is on the condition-met branch —
+      **both confirmed 11 Aug**
+- [ ] 🔴 **A `Go to` branch actually continues into the Wait.** Three of A1's four branches
+      reach step 6 by jump, not by connector — see the `Go to` section above. Step 1 of the run
+      picks the multi-unit option deliberately, so this is what the run proves. **If the
+      portfolio email lands but the nurture never does, this is why**
 - [ ] A2's two waits saved as appointment-relative rather than fixed delays
 - [ ] Which appointment-time merge token GHL produced, and that it resolves rather than
       shipping raw `{{...}}`
 - [ ] `{{contact.first_name}}` fills in on every email
-- [ ] Whether the SMS steps saved with no number attached
+- [x] Whether the SMS steps saved with no number attached — **all four A1/A2 SMS steps saved
+      clean**; A1-SMS-2 confirmed 11 Aug
 - [ ] A2's trigger carries the calendar filter
 - [ ] A3's two If/Else conditions kept their pipeline-stage filter
 - [ ] A3's `Update Opportunity` set **status** independently of stage

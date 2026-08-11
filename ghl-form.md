@@ -161,6 +161,31 @@ when a label is edited — if the option editor exposes only one string per opti
 a label/value pair, then the sentences *become* the values and A1 branches on those instead.
 Either outcome is workable; what matters is reading back what actually saved.
 
+#### ✅ Settled 11 Aug — the sentences became the values
+
+Read back from A1's If/Else picker during the build. The second outcome is what happened:
+GHL slugged each sentence label into the stored value.
+
+| Label the visitor sees | Stored value |
+|---|---|
+| My house has a leak or damage | `my_house_has_a_leak_or_damage` |
+| No leak yet, I want my house checked before the rains | `no_leak_yet_i_want_my_house_checked_before_the_rains` |
+| I have an apartment, several units, or more than one house | `i_have_an_apartment_several_units_or_more_than_one_house` |
+| I'm building new and have plans | `im_building_new_and_have_plans` |
+
+**They are ordinary snake_case, not the opaque 40-character strings feared.** The rule
+transliterates: lowercase, spaces and commas to underscores, **apostrophe dropped entirely** —
+`im_building_new`, not `i'm` or `i_m`. That apostrophe is the single character a hand-typed
+condition would have got wrong, and it would have failed silently.
+
+**The picker exists in the If/Else**, so none of this needed typing. The old warning about
+long auto-generated values can stand down; the reason to use the picker is now the apostrophe,
+not the length.
+
+**Do not edit these labels again.** The values are now load-bearing — A1's four branch
+conditions read them, and GHL regenerates the value when the label changes. A copy-edit to a
+sentence on the form silently orphans a branch.
+
 ### Not a defect — the pre-existing form
 
 A form named `Trueline — Roof Check Request` already existed in Sites → Forms from 8 Aug with
