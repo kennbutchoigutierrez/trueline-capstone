@@ -398,4 +398,5 @@ automations**. Both halves of that are already respected below.
 | `landing-page.md` | Full 11-section build sheet · cut version · combined prompt · section-by-section prompts · QA checklist |
 | `ghl-form.md` | The segmentation form — field spec, the four dropdown values, why tagging lives in the workflow, extension prompt |
 | `automations.md` | A1 A2 A3 — step-by-step, every SMS and email body, one extension prompt per workflow, build order and what blocks what |
+| `pitch/` | **The Loom capability pitch** — `script.md` what you say · `pitch.md` running order and pre-flight · `deck.pptx` the slides · `deck.cjs` rebuilds them |
 | `PROGRESS.md` | This file — where you stopped and how to restart |

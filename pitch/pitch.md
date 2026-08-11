@@ -7,9 +7,17 @@ to someone who might hire you. The Trueline system is the evidence, not the subj
 for you,"* never *"here is what I clicked."* Every time you catch yourself narrating the screen,
 switch to what the thing on screen would be worth to the person watching.
 
-Script: `pitch-script.md` — verbatim for the open and close, bullets for the demo.
-Deck: `pitch-deck.pptx` (7 slides, talk-track in the speaker notes). Source: `deck.js` —
-edit and re-run `node deck.js pitch-deck.pptx` to rebuild.
+Everything for this video lives in this folder:
+
+| File | What it's for |
+|---|---|
+| `script.md` | **What you say.** Verbatim for the open and close, bullets for the demo |
+| `pitch.md` | This file — what's on screen when, the pre-flight, and the bar |
+| `deck.pptx` | The 7 slides. Talk track is in the speaker notes |
+| `deck.cjs` | Source for the deck. `npm install pptxgenjs` once, then `node deck.cjs deck.pptx` |
+
+*(The generator is `.cjs`, not `.js` — a `package.json` further up the tree sets
+`"type": "module"`, which would otherwise stop it running.)*
 
 ---
 
@@ -19,12 +27,12 @@ edit and re-run `node deck.js pitch-deck.pptx` to rebuild.
 |---|---|
 | **Swap the booking link** | Slide 7 reads `REPLACE WITH YOUR BOOKING LINK` in green. Do not film it that way |
 | **Rename A1's generic steps** | Three `Go to` and three `Wait` steps all carry default labels. The canvas is a hero shot; make it readable |
-| **Open every tab in advance** | Landing page · GHL pipeline board · A1 canvas · `emails/email-2-nurture.html` in a browser tab · `carousel/out/` in an image viewer · the deck |
+| **Open every tab in advance** | Landing page · GHL pipeline board · A1 canvas · `../emails/email-2-nurture.html` in a browser tab · `../carousel/out/` in an image viewer · the deck |
 | **Zoom to 125–150%** | Especially the pipeline board and the workflow canvas. Small text is the most common failure on this brief |
 | **Close the plumbing** | Trust Center / A2P pages · anything showing this is ARCA's sub-account · Vercel dashboard · your editor (`.env.local` sits in the project root) · billing · password managers |
 | **Quiet room, one rehearsal** | Twice through out loud. Not scripted — you want it to sound like you know it, because you do |
 
-**The pretty email does not need the test pass.** Open `emails/email-2-nurture.html` directly in
+**The pretty email does not need the test pass.** Open `../emails/email-2-nurture.html` directly in
 Chrome. It renders full-bleed with no builder chrome and no inbox clutter, and the email is
 fully inline-styled, so what you see is what actually sends. That satisfies the "at least one
 pretty email on screen" bar on its own.
@@ -40,7 +48,7 @@ pretty email on screen" bar on its own.
 | **0:45–0:50** | Slide 3 | Flash card, two seconds |
 | **0:50–1:35** | **Landing page, live** | Scroll it. The promise in the hero · prices published in public, which almost nobody in this market does · the form near the bottom and *why* it asks what it asks. Land on: *"I can build you a page that earns the click it paid for"* |
 | **1:35–1:40** | Slide 4 | Flash card |
-| **1:40–2:20** | **Carousel + ad drafts** | The nine slides from `carousel/out/`. One creative source, three ratios — feed, square, Stories — so nothing gets a bad crop. Four hook angles written against the same offer. *"I can build the creative and the copy, not just place the buy"* |
+| **1:40–2:20** | **Carousel + ad drafts** | The nine slides from `../carousel/out/`. One creative source, three ratios — feed, square, Stories — so nothing gets a bad crop. Four hook angles written against the same offer. *"I can build the creative and the copy, not just place the buy"* |
 | **2:20–2:25** | Slide 5 | Flash card |
 | **2:25–3:05** | **Pipeline board** | Six stages, fifteen real leads, real peso values. Two decisions worth naming: **Lost isn't a stage** — dead deals keep their position and get a status plus a `nurture-may` tag, so the board shows *where* money dies instead of hiding it in a graveyard column. And the testimonials on the page use names from this board — *"the page, the board and the emails are one consistent world"* |
 | **3:05–3:10** | Slide 6 | Flash card |

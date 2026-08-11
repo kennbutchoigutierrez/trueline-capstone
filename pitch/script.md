@@ -1,4 +1,4 @@
-# pitch-script.md — the spoken version
+# script.md — the spoken version
 
 **How to use this.** The blocks marked 🎯 are worth learning close to word for word — the open,
 each section's value line, and the close. Everything else is bullets on purpose: you'll be
@@ -10,7 +10,7 @@ polished one, and Loom viewers forgive far more than you think.
 
 ~660 words of speech. At a natural pace that's **4:15–4:45**, inside the 3–6 minute bar.
 
-Voice rules from `brief.md` still apply: no exclamation points, no ALL CAPS, English throughout.
+Voice rules from `../brief.md` still apply: no exclamation points, no ALL CAPS, English throughout.
 
 ---
 
@@ -53,7 +53,7 @@ Scroll it steadily. Talk about the decisions, not the sections.
 
 ---
 
-## 1:40–2:20 · Slide 4, then `carousel/out/` and the ad drafts
+## 1:40–2:20 · Slide 4, then `../carousel/out/` and the ad drafts
 
 - Nine slides. Founder story hook, six signs, then the counterweight and the call
 - **One creative source, three ratios** — feed, square, Stories — so nothing gets a bad crop on any placement
