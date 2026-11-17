@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Interactive, privacy-safe campaign planning demo for the fictional Trueline Roof Care project.">
+  <title>Trueline Meta Campaign Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#lab" aria-label="Trueline campaign lab home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Trueline / campaign lab</span>
+    </a>
+    <div class="status"><span></span> Draft workspace · no spend</div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="context">Portfolio simulation for a fictional roofing business</p>
+        <h1 id="page-title">Build the campaign.<br>See the logic move.</h1>
+      </div>
+      <div class="intro-copy">
+        <p>Change the plan and watch the creative, placement, forecast, and testing recommendation respond. The interface demonstrates campaign thinking—not access to a live ad account.</p>
+        <a href="#method">How the system works</a>
+      </div>
+    </section>
+
+    <section class="lab" id="lab" aria-label="Interactive campaign planner">
+      <aside class="controls" aria-labelledby="controls-title">
+        <div class="panel-heading">
+          <span>Campaign inputs</span>
+          <span class="step">01</span>
+        </div>
+        <h2 id="controls-title">Set the flight plan</h2>
+
+        <fieldset>
+          <legend>Objective</legend>
+          <div class="segmented" id="objective-control">
+            <button type="button" data-value="traffic" aria-pressed="true">Traffic</button>
+            <button type="button" data-value="leads" aria-pressed="false">Leads</button>
+            <button type="button" data-value="awareness" aria-pressed="false">Awareness</button>
+          </div>
+        </fieldset>
+
+        <label class="field-label" for="creative">Creative angle</label>
+        <select id="creative">
+          <option value="story">₱410k story</option>
+          <option value="taglish">Taglish pattern break</option>
+          <option value="washer">₱18 washer detail</option>
+          <option value="carousel">Six-signs carousel</option>
+        </select>
+
+        <fieldset>
+          <legend>Placement preview</legend>
+          <div class="segmented" id="placement-control">
+            <button type="button" data-value="feed" aria-pressed="true">Feed 4:5</button>
+            <button type="button" data-value="story" aria-pressed="false">Story 9:16</button>
+          </div>
+        </fieldset>
+
+        <div class="range-row">
+          <label for="budget">Daily budget</label>
+          <output id="budget-output" for="budget">₱300</output>
+        </div>
+        <input id="budget" type="range" min="150" max="1500" value="300" step="50">
+
+        <div class="two-fields">
+          <label>Duration
+            <select id="duration">
+              <option value="7">7 days</option>
+              <option value="14" selected>14 days</option>
+              <option value="30">30 days</option>
+            </select>
+          </label>
+          <label>Audience
+            <select id="audience">
+              <option value="homeowners">Laguna homeowners</option>
+              <option value="property">Property operators</option>
+              <option value="newbuild">New-build owners</option>
+            </select>
+          </label>
+        </div>
+
+        <button class="run-button" type="button" id="run-forecast">Run planning forecast</button>
+        <p class="control-note">This does not create, publish, or fund an advertisement.</p>
+      </aside>
+
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="panel-heading">
+          <span>Placement preview</span>
+          <span class="step">02</span>
+        </div>
+        <div class="preview-topline">
+          <h2 id="preview-title">What the audience sees</h2>
+          <span id="format-label">Facebook feed · 4:5</span>
+        </div>
+
+        <div class="device-stage">
+          <article class="ad-shell feed" id="ad-shell">
+            <div class="ad-header">
+              <span class="avatar" aria-hidden="true">T</span>
+              <span><strong>Trueline Roof Care</strong><small>Sponsored · Draft preview</small></span>
+              <span class="more" aria-hidden="true">•••</span>
+            </div>
+            <p class="ad-copy" id="ad-copy"></p>
+            <div class="creative-frame">
+              <img id="creative-image" src="assets/story-feed.png" alt="Trueline roof-care advertising creative">
+              <span class="story-ui" aria-hidden="true">Learn more</span>
+            </div>
+            <div class="ad-footer">
+              <span><small>TRUELINE-ROOF-CARE.VERCEL.APP</small><strong id="ad-headline"></strong></span>
+              <button type="button" tabindex="-1">Learn more</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="hypothesis">
+          <span>Test hypothesis</span>
+          <p id="hypothesis-copy"></p>
+        </div>
+      </section>
+
+      <aside class="forecast" aria-labelledby="forecast-title">
+        <div class="panel-heading">
+          <span>Planning model</span>
+          <span class="step">03</span>
+        </div>
+        <h2 id="forecast-title">Synthetic forecast</h2>
+        <p class="forecast-note">Directional estimates for demonstrating media-planning logic. Not historical results.</p>
+
+        <div class="metric primary">
+          <span id="primary-label">Estimated landing-page views</span>
+          <strong id="primary-value">—</strong>
+          <small id="primary-range">Run the forecast to calculate</small>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><span>Reach</span><strong id="reach-value">—</strong></div>
+          <div class="metric"><span id="cost-label">Cost / view</span><strong id="cost-value">—</strong></div>
+          <div class="metric"><span>Frequency</span><strong id="frequency-value">—</strong></div>
+          <div class="metric"><span>Total plan</span><strong id="spend-value">—</strong></div>
+        </div>
+
+        <div class="allocation">
+          <div class="allocation-heading"><span>Creative test allocation</span><strong>100%</strong></div>
+          <div class="allocation-bar" aria-hidden="true">
+            <i style="--w:40%"></i><i style="--w:35%"></i><i style="--w:25%"></i>
+          </div>
+          <ol id="allocation-list"></ol>
+        </div>
+
+        <div class="recommendation" aria-live="polite">
+          <span>Planner recommendation</span>
+          <p id="recommendation-copy">Run the forecast to generate a next-step recommendation.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="method" id="method" aria-labelledby="method-title">
+      <div class="method-heading">
+        <p class="context">Campaign architecture</p>
+        <h2 id="method-title">An ad is useful only when the path after the click is clear.</h2>
+      </div>
+      <div class="journey" role="list">
+        <article role="listitem"><span>Attention</span><h3>Four deliberate angles</h3><p>Story, language, specificity, and format are tested as separate variables.</p></article>
+        <article role="listitem"><span>Conversion</span><h3>One matching destination</h3><p>Every concept points to the same roof-check offer and carries its own UTM tag.</p></article>
+        <article role="listitem"><span>Operations</span><h3>Segment, book, follow up</h3><p>The page connects to a four-path intake, calendar, CRM pipeline, and draft automations.</p></article>
+      </div>
+      <div class="truth-note">
+        <strong>What is real here?</strong>
+        <p>The creative assets, campaign structure, copy variants, landing page, and system architecture were built for the Trueline capstone. Trueline is fictional; the campaign stayed in draft; all planning forecasts on this page are synthetic.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Trueline Meta Campaign Lab · portfolio demonstration</span>
+    <a href="https://gutierrez-portfolio-zeta.vercel.app/" target="_blank" rel="noopener">Peter Kenneth Gutierrez ↗</a>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
